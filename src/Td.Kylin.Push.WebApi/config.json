@@ -1,0 +1,32 @@
+﻿{
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "data source=112.74.90.88;initial catalog=Kylin.Test;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
+      // "ConnectionString": "data source=192.168.1.244;initial catalog=Kylin.Test;persist security info=True;user id=sa;password=sa123456;MultipleActiveResultSets=True;"
+
+    },
+    "APIConnectionString": "data source=112.74.90.88;initial catalog=Kylin.Test;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
+    // "APIConnectionString": "data source=192.168.1.244;initial catalog=Kylin.Test;persist security info=True;user id=sa;password=sa123456;MultipleActiveResultSets=True;"
+
+  },
+  "ServerId": "S0200",
+  "District": 1,
+  "Platform": 2,
+  //极光推送APP端对应的Key和Secret
+  "JPush": {
+    "UserClient": {
+      "ApiKey": "22938e8dda251c719523f75f",
+      "ApiSecret": "a78f73d32ed3050026902707"
+    },
+    "MerchantClient": {
+      "ApiKey": "22938e8dda251c719523f75f",
+      "ApiSecret": "a78f73d32ed3050026902707"
+    },
+    "WorkerClient": {
+      "ApiKey": "22938e8dda251c719523f75f",
+      "ApiSecret": "a78f73d32ed3050026902707"
+    }
+  },
+  //错误日志文档地址，在此文件夹中，每年/每月生成一个日志文件,如：2016/01.txt
+  "ErrorLogFolder": "logs/error"
+}
