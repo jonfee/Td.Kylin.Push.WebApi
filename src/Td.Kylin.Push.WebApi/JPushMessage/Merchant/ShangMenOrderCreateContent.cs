@@ -3,9 +3,9 @@
 namespace Td.Kylin.Push.WebApi.JPushMessage.Merchant
 {
     /// <summary>
-    /// 预约订单下单内容
+    /// 上门订单下单内容
     /// </summary>
-    public class YuYueOrderCreateContent
+    public class ShangMenOrderCreateContent
     {
         /// <summary>
         /// 订单ID
@@ -21,11 +21,6 @@ namespace Td.Kylin.Push.WebApi.JPushMessage.Merchant
         /// 下单用户昵称
         /// </summary>
         public string UserName { get; set; }
-
-        /// <summary>
-        /// 预约的商户ID
-        /// </summary>
-        public long MerchantID { get; set; }
 
         /// <summary>
         /// 业务ID
@@ -56,5 +51,10 @@ namespace Td.Kylin.Push.WebApi.JPushMessage.Merchant
         /// 服务时间
         /// </summary>
         public DateTime ServiceTime { get; set; }
+
+        /// <summary>
+        /// 下单时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Td.Kylin.Push.WebApi.JPushMessage.Merchant
+namespace Td.Kylin.Push.WebApi.JPushMessage.User
 {
     /// <summary>
-    /// 上门订单下单内容
+    /// 上门/预约订单已被接单
     /// </summary>
-    public class ShangMenOrderCreateContent
+    public class AppointOrderAcceptContent
     {
         /// <summary>
         /// 订单ID
@@ -18,9 +18,19 @@ namespace Td.Kylin.Push.WebApi.JPushMessage.Merchant
         public long UserID { get; set; }
 
         /// <summary>
-        /// 下单用户昵称
+        /// 接单方类型（1商家，2个人服务者）
         /// </summary>
-        public string UserName { get; set; }
+        public int AcceptType { get; set; }
+
+        /// <summary>
+        /// 接单方的账号ID
+        /// </summary>
+        public long AcceptAccountID { get; set; }
+
+        /// <summary>
+        /// 接单方的名称
+        /// </summary>
+        public string AcceptName { get; set; }
 
         /// <summary>
         /// 业务ID
@@ -51,5 +61,15 @@ namespace Td.Kylin.Push.WebApi.JPushMessage.Merchant
         /// 服务时间
         /// </summary>
         public DateTime ServiceTime { get; set; }
+
+        /// <summary>
+        /// 下单时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
+
+        /// <summary>
+        /// 接单时间
+        /// </summary>
+        public DateTime AcceptTime { get; set; }
     }
 }
