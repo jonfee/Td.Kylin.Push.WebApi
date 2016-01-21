@@ -3,6 +3,7 @@ using System;
 using Td.Kylin.Push.WebApi.Core;
 using Td.Kylin.Push.WebApi.JPushMessage.Merchant;
 using Td.Kylin.Push.WebApi.JPushMessage.User;
+using Td.Kylin.Push.WebApi.JPushMessage.Worker;
 using Td.Kylin.Push.WebApi.JPushProvider;
 using Td.Kylin.Push.WebApi.Loger;
 using Td.Kylin.WebApi;
@@ -151,8 +152,8 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 };
 
                 //推送给商家
-                KylinPushContext merchantContext = new KylinPushContext(Configs.JPushConfigs.MerchantJPushConfig, message);
-                var merchantResult = merchantContext.Send();
+                KylinPushContext context = new KylinPushContext(Configs.JPushConfigs.MerchantJPushConfig, message);
+                var result = context.Send();
 
                 success = true;
             }

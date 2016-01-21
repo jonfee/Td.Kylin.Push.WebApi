@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Td.Kylin.Push.WebApi.JPushMessage.Merchant
+namespace Td.Kylin.Push.WebApi.JPushMessage.Worker
 {
     /// <summary>
     /// 上门订单指派

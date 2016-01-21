@@ -104,6 +104,6 @@
         /// <summary>
         /// IM消息
         /// </summary>
-        IM=25
+        IM = 25
     }
 }

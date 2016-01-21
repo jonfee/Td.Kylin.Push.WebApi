@@ -70,24 +70,25 @@ namespace Td.Kylin.Push.WebApi.JPushProvider
                 case PushDataType.MerchantGoods://商户商品
                 case PushDataType.MerchantService://商户服务
                 case PushDataType.MerchantWelfare://商家福利
-                    payload = GetNotificationPushPayload();
-                    break;
+                                                  //payload = GetNotificationPushPayload();
+                                                  //break;
+                case PushDataType.WelfareWinResult://福利活动中奖结果
+                case PushDataType.WelfareCouponUsed://优惠券福利被使用
+                case PushDataType.WelfareDraw://福利被领取                
+                case PushDataType.CertificateResult://认证审核结果
+                case PushDataType.FundsChange://资金变动
+                case PushDataType.IM://IM消息
                 case PushDataType.AppointOrderChange://上门预约订单状态变更
                 case PushDataType.Job://工作机会
                 case PushDataType.MallOrderChange://自营商城订单状态变更
                 case PushDataType.MerchantGoodsOrderChange://商户商品订单状态变更
                 case PushDataType.MerchantGoodsOrderCreate://商户商品订单下单 
                 case PushDataType.Resume://简历
-                case PushDataType.ShangMenOrderCreate://上门订单下单
-                case PushDataType.WelfareCouponUsed://优惠券福利被使用
-                case PushDataType.WelfareDraw://福利被领取
-                case PushDataType.WelfareWinResult://福利活动中奖结果
-                case PushDataType.YuYueOrderCreate://预约订单下单
-                case PushDataType.CertificateResult://认证审核结果
-                case PushDataType.FundsChange://资金变动
-                case PushDataType.AppointOrderAllot://上门预约订单被指派
-                case PushDataType.IM://IM消息
-                    payload = GetMessagePushPayload();
+                case PushDataType.ShangMenOrderCreate://上门订单下单  
+                case PushDataType.YuYueOrderCreate://预约订单下单              
+                case PushDataType.AppointOrderAllot://上门预约订单被指派                
+                    //payload = GetMessagePushPayload();
+                    payload = GetNotificationPushPayload();
                     break;
             }
 
