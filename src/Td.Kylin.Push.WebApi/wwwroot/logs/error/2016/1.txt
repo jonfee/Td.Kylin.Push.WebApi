@@ -5,3 +5,90 @@ ________________________________________________________________________________
 异常信息：出错了
 异常内容：   在 Td.Kylin.Push.WebApi.Controllers.AppointController.PushShangMenOrder(ShangMenOrderCreateContent content) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\Td.Kylin.Push.WebApi\Controllers\AppointController.cs:行号 61
 ________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+
+日期：2016/1/22 13:31:30
+标题：服务器请求异常
+异常信息：远程服务器返回错误: (401) 未经授权。
+异常内容：   在 JPush.Api.common.BaseHttpClient.sendRequest(String method, String url, String auth, String reqParams) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\BaseHttpClient.cs:行号 109
+   在 JPush.Api.common.BaseHttpClient.sendPost(String url, String auth, String reqParams) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\BaseHttpClient.cs:行号 26
+   在 JPush.Api.push.PushClient.sendPush(String payloadString) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\push\PushClient.cs:行号 40
+   在 JPush.Api.push.PushClient.sendPush(PushPayload payload) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\push\PushClient.cs:行号 32
+   在 JPush.Api.JPushClient.SendPush(PushPayload payload) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\JPushClient.cs:行号 50
+   在 Td.Kylin.Push.WebApi.JPushProvider.KylinPushContext.Send() 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\Td.Kylin.Push.WebApi\JPushProvider\KylinPushContext.cs:行号 175
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+
+日期：2016/1/22 13:33:32
+标题：Unexpected token Integer when parsing enum
+异常信息：Unexpected token Integer when parsing enum
+异常内容：   在 Td.Kylin.WebApi.Json.Int64Convert.ReadJson(JsonReader reader, Type objectType, Object existingValue, JsonSerializer serializer)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.DeserializeConvertable(JsonConverter converter, JsonReader reader, Type objectType, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonSerializer.Deserialize(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 JPush.Api.common.ResponseWrapper.setErrorObject() 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\ResponseWrapper.cs:行号 34
+   在 JPush.Api.common.BaseHttpClient.sendRequest(String method, String url, String auth, String reqParams) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\BaseHttpClient.cs:行号 105
+   在 JPush.Api.common.BaseHttpClient.sendPost(String url, String auth, String reqParams) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\BaseHttpClient.cs:行号 26
+   在 JPush.Api.push.PushClient.sendPush(String payloadString) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\push\PushClient.cs:行号 40
+   在 JPush.Api.push.PushClient.sendPush(PushPayload payload) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\push\PushClient.cs:行号 32
+   在 JPush.Api.JPushClient.SendPush(PushPayload payload) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\JPushClient.cs:行号 50
+   在 Td.Kylin.Push.WebApi.JPushProvider.KylinPushContext.Send() 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\Td.Kylin.Push.WebApi\JPushProvider\KylinPushContext.cs:行号 175
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+
+日期：2016/1/22 13:33:49
+标题：Unexpected token Integer when parsing enum
+异常信息：Unexpected token Integer when parsing enum
+异常内容：   在 Td.Kylin.WebApi.Json.Int64Convert.ReadJson(JsonReader reader, Type objectType, Object existingValue, JsonSerializer serializer)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.DeserializeConvertable(JsonConverter converter, JsonReader reader, Type objectType, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonSerializer.Deserialize(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 JPush.Api.common.ResponseWrapper.setErrorObject() 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\ResponseWrapper.cs:行号 34
+   在 JPush.Api.common.BaseHttpClient.sendRequest(String method, String url, String auth, String reqParams) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\BaseHttpClient.cs:行号 105
+   在 JPush.Api.common.BaseHttpClient.sendPost(String url, String auth, String reqParams) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\BaseHttpClient.cs:行号 26
+   在 JPush.Api.push.PushClient.sendPush(String payloadString) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\push\PushClient.cs:行号 40
+   在 JPush.Api.push.PushClient.sendPush(PushPayload payload) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\push\PushClient.cs:行号 32
+   在 JPush.Api.JPushClient.SendPush(PushPayload payload) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\JPushClient.cs:行号 50
+   在 Td.Kylin.Push.WebApi.JPushProvider.KylinPushContext.Send() 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\Td.Kylin.Push.WebApi\JPushProvider\KylinPushContext.cs:行号 175
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+
+日期：2016/1/22 13:35:00
+标题：Unexpected token Integer when parsing enum
+异常信息：Unexpected token Integer when parsing enum
+异常内容：   在 Td.Kylin.WebApi.Json.Int64Convert.ReadJson(JsonReader reader, Type objectType, Object existingValue, JsonSerializer serializer)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.DeserializeConvertable(JsonConverter converter, JsonReader reader, Type objectType, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonSerializer.Deserialize(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 JPush.Api.common.ResponseWrapper.setErrorObject() 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\ResponseWrapper.cs:行号 34
+   在 JPush.Api.common.BaseHttpClient.sendRequest(String method, String url, String auth, String reqParams) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\BaseHttpClient.cs:行号 105
+   在 JPush.Api.common.BaseHttpClient.sendPost(String url, String auth, String reqParams) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\common\BaseHttpClient.cs:行号 26
+   在 JPush.Api.push.PushClient.sendPush(String payloadString) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\push\PushClient.cs:行号 40
+   在 JPush.Api.push.PushClient.sendPush(PushPayload payload) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\push\PushClient.cs:行号 32
+   在 JPush.Api.JPushClient.SendPush(PushPayload payload) 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\JPush.Api\JPushClient.cs:行号 50
+   在 Td.Kylin.Push.WebApi.JPushProvider.KylinPushContext.Send() 位置 D:\Work\01-Projects\Kylin.WebApi\Td.Kylin.Push.WebApi\src\Td.Kylin.Push.WebApi\JPushProvider\KylinPushContext.cs:行号 175
+________________________________________________________________________________________________________________

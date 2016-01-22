@@ -1,4 +1,5 @@
-﻿using Td.Kylin.Push.WebApi.Core;
+﻿using System.Collections;
+using Td.Kylin.Push.WebApi.Core;
 using Td.Kylin.Push.WebApi.SysEnum;
 
 namespace Td.Kylin.Push.WebApi.JPushMessage
@@ -34,8 +35,8 @@ namespace Td.Kylin.Push.WebApi.JPushMessage
         public PushDataType DataType { get; set; }
 
         /// <summary>
-        /// 过滤后的用户ID
+        /// 筛选条件
         /// </summary>
-        public long[] FilterUsers { get; set; }
+        public object Filter { get; set; }
     }
 }

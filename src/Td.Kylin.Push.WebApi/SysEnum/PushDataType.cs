@@ -104,6 +104,14 @@
         /// <summary>
         /// IM消息
         /// </summary>
-        IM = 25
+        IM = 25,
+        /// <summary>
+        /// 公司邀请员工加入
+        /// </summary>
+        MerchantInviteWorker = 26,
+        /// <summary>
+        /// 员工申请加入公司
+        /// </summary>
+        WorkerJoinMerchant = 27
     }
 }

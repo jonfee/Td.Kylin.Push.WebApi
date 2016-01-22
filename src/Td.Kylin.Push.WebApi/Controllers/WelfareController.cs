@@ -20,7 +20,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /**
          * @apiVersion 1.0.0
          * @apiDescription 此接口在用户针对上门服务下单成功后推送给相关业务的商家或个人服务人员
-         * @api {get} /v1/appoint/pushshangmen 用户上门服务下单
+         * @api {post} /v1/appoint/pushshangmen 用户上门服务下单
          * @apiSampleRequest /v1/appoint/pushshangmen
          * @apiName PushShangMenOrder
          * @apiGroup Appoint
@@ -64,7 +64,6 @@ namespace Td.Kylin.Push.WebApi.Controllers
                     Content = content,
                     DataID = content.WelfarePhaseID,
                     DataType = SysEnum.PushDataType.WelfareWinResult,
-                    FilterUsers = content.UserIDs,
                     Title = string.Format("参与的福利活动中奖啦！(奖品：{0})", content.WelfareName)
                 };
 

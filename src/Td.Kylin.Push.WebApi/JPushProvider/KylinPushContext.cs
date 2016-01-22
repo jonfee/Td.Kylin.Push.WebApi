@@ -5,6 +5,7 @@ using JPush.Api.push;
 using JPush.Api.push.mode;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using Td.Kylin.Push.WebApi.JPushMessage;
 using Td.Kylin.Push.WebApi.Loger;
 using Td.Kylin.Push.WebApi.SysEnum;
@@ -70,8 +71,8 @@ namespace Td.Kylin.Push.WebApi.JPushProvider
                 case PushDataType.MerchantGoods://商户商品
                 case PushDataType.MerchantService://商户服务
                 case PushDataType.MerchantWelfare://商家福利
-                                                  //payload = GetNotificationPushPayload();
-                                                  //break;
+                    payload = GetNotificationPushPayload();
+                    break;
                 case PushDataType.WelfareWinResult://福利活动中奖结果
                 case PushDataType.WelfareCouponUsed://优惠券福利被使用
                 case PushDataType.WelfareDraw://福利被领取                
@@ -87,8 +88,7 @@ namespace Td.Kylin.Push.WebApi.JPushProvider
                 case PushDataType.ShangMenOrderCreate://上门订单下单  
                 case PushDataType.YuYueOrderCreate://预约订单下单              
                 case PushDataType.AppointOrderAllot://上门预约订单被指派                
-                    //payload = GetMessagePushPayload();
-                    payload = GetNotificationPushPayload();
+                    payload = GetMessagePushPayload();
                     break;
             }
 
@@ -110,13 +110,11 @@ namespace Td.Kylin.Push.WebApi.JPushProvider
             pushPayload.audience = Audience.all();//所有目标
             pushPayload.message = Message.content(jsonContent)
                                         .setTitle(KylinPushMessage.Title).AddExtras("datatype", KylinPushMessage.DataType.ToString("d"));
-            if (null != KylinPushMessage.DataID)
+            if (null != KylinPushMessage.Filter)
             {
-                pushPayload.message.AddExtras("dataid", KylinPushMessage.DataID.ToString());
-            }
-            if (null != KylinPushMessage.FilterUsers && KylinPushMessage.FilterUsers.Length > 0)
-            {
-                pushPayload.message.AddExtras("filter", string.Join(",", KylinPushMessage.FilterUsers));
+                string jsonFilter = JsonConvert.SerializeObject(KylinPushMessage.Filter);
+
+                pushPayload.message.AddExtras("filter", jsonFilter);
             }
 
             return pushPayload;
@@ -147,13 +145,11 @@ namespace Td.Kylin.Push.WebApi.JPushProvider
             pushPayload.platform = Platform.all();//所有平台
             pushPayload.audience = Audience.all();//所有目标
             pushPayload.notification = new Notification().setAlert(content).setAllAddExtra("datatype", KylinPushMessage.DataType.ToString("d"));
-            if (null != KylinPushMessage.DataID)
+            if (null != KylinPushMessage.Filter)
             {
-                pushPayload.notification.setAllAddExtra("dataid", KylinPushMessage.DataID.ToString());
-            }
-            if (null != KylinPushMessage.FilterUsers && KylinPushMessage.FilterUsers.Length > 0)
-            {
-                pushPayload.notification.setAllAddExtra("filter", string.Join(",", KylinPushMessage.FilterUsers));
+                string jsonFilter = JsonConvert.SerializeObject(KylinPushMessage.Filter);
+
+                pushPayload.notification.setAllAddExtra("filter", jsonFilter);
             }
 
             return pushPayload;

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Mvc;
+using Newtonsoft.Json;
 using System;
+using System.Collections;
 using Td.Kylin.Push.WebApi.Core;
 using Td.Kylin.Push.WebApi.JPushMessage.Merchant;
 using Td.Kylin.Push.WebApi.JPushMessage.User;
@@ -19,7 +21,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /**
          * @apiVersion 1.0.0
          * @apiDescription 此接口在用户针对上门服务下单成功后推送给相关业务的商家或个人服务人员
-         * @api {get} /v1/appoint/pushshangmen 用户上门服务下单
+         * @api {post} /v1/appoint/pushshangmen 用户上门服务下单
          * @apiSampleRequest /v1/appoint/pushshangmen
          * @apiName PushShangMenOrder
          * @apiGroup Appoint
@@ -51,31 +53,31 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        [HttpPost("pushshangmen")]
-        [ApiAuthorization]
+        [HttpGet("pushshangmen")]
+        //[ApiAuthorization]
         public IActionResult PushShangMenOrder(ShangMenOrderCreateContent content)
         {
             bool success = false;
 
             try
             {
-                //content = new ShangMenOrderCreateContent
-                //{
-                //    Address = "南山区蛇口网谷万维大楼203",
-                //    BusinessID = 1241513214543,
-                //    Number = 2,
-                //    OrderID = 853249,
-                //    ServiceName = "空调清洗",
-                //    ServiceTime = DateTime.Now.AddDays(5),
-                //    Unit = "台"
-                //};
+                content = new ShangMenOrderCreateContent
+                {
+                    Address = "南山区蛇口网谷万维大楼203",
+                    BusinessID = 1241513214543,
+                    Number = 2,
+                    OrderID = 853249,
+                    ServiceName = "空调清洗",
+                    ServiceTime = DateTime.Now.AddDays(5),
+                    Unit = "台",
+                };
 
                 JPushMessage.PushMessage message = new JPushMessage.PushMessage
                 {
                     Content = content,
                     DataID = content.OrderID,
                     DataType = SysEnum.PushDataType.ShangMenOrderCreate,
-                    FilterUsers = null,
+                    Filter = new { BusinessID = content.BusinessID },//当前订单的业务ID
                     Title = string.Format("{0}({1}{2})", content.ServiceName, content.Number, content.Unit)
                 };
 
@@ -101,7 +103,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /**
          * @apiVersion 1.0.0
          * @apiDescription 此接口在用户针对商家服务预约下单成功后推送给预约的商家
-         * @api {get} /v1/appoint/pushyuyue 用户预约服务下单
+         * @api {post} /v1/appoint/pushyuyue 用户预约服务下单
          * @apiSampleRequest /v1/appoint/pushyuyue
          * @apiName PushYuYueOrder
          * @apiGroup Appoint
@@ -147,7 +149,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                     Content = content,
                     DataID = content.OrderID,
                     DataType = SysEnum.PushDataType.YuYueOrderCreate,
-                    FilterUsers = new[] { content.MerchantID },//推送给指定商家
+                    Filter = new { MerchantID = content.MerchantID },//推送给指定的商户
                     Title = string.Format("有新的订单！{0}({1}{2})", content.ServiceName, content.Number, content.Unit)
                 };
 
@@ -169,7 +171,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /**
          * @apiVersion 1.0.0
          * @apiDescription 此接口用于商户指派订单给工作人员时使用
-         * @api {get} /v1/appoint/allot 上门订单指派
+         * @api {post} /v1/appoint/allot 上门订单指派
          * @apiSampleRequest /v1/appoint/allot
          * @apiName OrderAllot
          * @apiGroup Appoint
@@ -217,7 +219,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                     Content = content,
                     DataID = content.OrderID,
                     DataType = SysEnum.PushDataType.AppointOrderAllot,
-                    FilterUsers = new[] { content.WorkerID },//推送给指定服务人员
+                    Filter = new { WorkerID = content.WorkerID },//推送给指定服务人员
                     Title = string.Format("订单：{0}({1}{2})已指派给您", content.ServiceName, content.Number, content.Unit)
                 };
 
@@ -239,7 +241,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /**
          * @apiVersion 1.0.0
          * @apiDescription 此接口用于用户上门或预约订单被接时推送消息给下单用户
-         * @api {get} /v1/appoint/accept 订单已被接单
+         * @api {post} /v1/appoint/accept 订单已被接单
          * @apiSampleRequest /v1/appoint/accept
          * @apiName OrderAccept
          * @apiGroup Appoint
@@ -287,7 +289,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                     Content = content,
                     DataID = content.OrderID,
                     DataType = SysEnum.PushDataType.AppointOrderChange,
-                    FilterUsers = new[] { content.UserID },//推送给下单用户
+                    Filter = new { UserID = content.UserID },//推送给下单用户
                     Title = string.Format("订单：{0}({1}{2})已被接单", content.ServiceName, content.Number, content.Unit)
                 };
 
