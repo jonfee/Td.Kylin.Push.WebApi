@@ -20,22 +20,20 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /**
          * @apiVersion 1.0.0
          * @apiDescription 此接口在用户针对上门服务下单成功后推送给相关业务的商家或个人服务人员
-         * @api {post} /v1/appoint/pushshangmen 用户上门服务下单
-         * @apiSampleRequest /v1/appoint/pushshangmen
-         * @apiName PushShangMenOrder
-         * @apiGroup Appoint
+         * @api {post} /v1/welfare/lottery 用户上门服务下单
+         * @apiSampleRequest /v1/welfare/lottery
+         * @apiName LotteryResult
+         * @apiGroup Welfare
          * @apiPermission All
          *
-         * @apiParam {long} OrderID 上门订单ID
-         * @apiParam {long} UserID 下单的用户ID
-         * @apiParam {string} UserName 下单的用户昵称
-         * @apiParam {long} BusinessID 订单所属服务的业务ID
-         * @apiParam {string} ServiceName 订单所属服务或业务的名称
-         * @apiParam {int} Number 数量
-         * @apiParam {string} Unit 单位(如：小时)
-         * @apiParam {string} Address 上门服务的地址
-         * @apiParam {datetime} ServiceTime 服务时间
-         * @apiParam {datetime} CreateTime 下单时间
+         * @apiParam {long} Welfare 福利ID
+         * @apiParam {int} WelfareType 福利类型
+         * @apiParam {long} WelfarePhaseID 福利活动ID
+         * @apiParam {string} WelfareName 福利名称
+         * @apiParam {long} MerchantID 福利提供商ID
+         * @apiParam {string} MerchantName 福利提供商名称
+         * @apiParam {long[]} UserIDs 中奖用户ID
+         * @apiParam {datetime} LooeryTime 中奖时间
          *
          * @apiSuccessExample 正常输出：
          * 推送结果[Boolean]，True表示推送成功，Flase表示失败

@@ -48,9 +48,9 @@ namespace Td.Kylin.Push.WebApi.JPushMessage.User
         public int Number { get; set; }
 
         /// <summary>
-        /// 单位（如：台）
+        /// 单位（如：1表示小时）
         /// </summary>
-        public string Unit { get; set; }
+        public int Unit { get; set; }
 
         /// <summary>
         /// 服务地点

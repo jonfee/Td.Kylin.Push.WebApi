@@ -54,7 +54,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /// <param name="content"></param>
         /// <returns></returns>
         [HttpGet("pushshangmen")]
-        //[ApiAuthorization]
+        [ApiAuthorization]
         public IActionResult PushShangMenOrder(ShangMenOrderCreateContent content)
         {
             bool success = false;
@@ -69,7 +69,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                     OrderID = 853249,
                     ServiceName = "空调清洗",
                     ServiceTime = DateTime.Now.AddDays(5),
-                    Unit = "台",
+                    Unit = 1,
                 };
 
                 JPushMessage.PushMessage message = new JPushMessage.PushMessage

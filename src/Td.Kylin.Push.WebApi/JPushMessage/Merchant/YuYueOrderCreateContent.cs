@@ -43,9 +43,20 @@ namespace Td.Kylin.Push.WebApi.JPushMessage.Merchant
         public int Number { get; set; }
 
         /// <summary>
-        /// 单位（如：台）
+        /// 单位（如：1表示小时）
         /// </summary>
-        public string Unit { get; set; }
+        public int Unit { get; set; }
+
+        /// <summary>
+        /// 订单总金额
+        /// </summary>
+        public decimal OrderAmount { get; set; }
+
+
+        /// <summary>
+        /// 用户备注
+        /// </summary>
+        public string UserRemark { get; set; }
 
         /// <summary>
         /// 服务地点
