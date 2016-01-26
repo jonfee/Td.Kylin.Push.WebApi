@@ -2,11 +2,11 @@
   "Data": {
     "DefaultConnection": {
       // "ConnectionString": "data source=192.168.1.244;initial catalog=Kylin.Test;persist security info=True;user id=sa;password=sa123456;MultipleActiveResultSets=True;"
-      "ConnectionString": "data source=112.74.90.88;initial catalog=Kylin.Test;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
+      "ConnectionString": "data source=139.129.194.132;initial catalog=Kylin.Test;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
 
     },
     // "APIConnectionString": "data source=192.168.1.244;initial catalog=Kylin.Test;persist security info=True;user id=sa;password=sa123456;MultipleActiveResultSets=True;"
-    "APIConnectionString": "data source=112.74.90.88;initial catalog=Kylin.Test;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
+    "APIConnectionString": "data source=139.129.194.132;initial catalog=Kylin.Test;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
   },
   "ServerId": "S0200",
   "District": 1,

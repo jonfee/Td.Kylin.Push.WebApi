@@ -49,7 +49,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /// 福利开奖结果推送（推送给中奖用户）
         /// </summary>
         /// <returns></returns>
-        [HttpGet("lottery")]
+        [HttpPost("lottery")]
         [ApiAuthorization]
         public IActionResult LotteryResult(WelfareWinnerContent content)
         {

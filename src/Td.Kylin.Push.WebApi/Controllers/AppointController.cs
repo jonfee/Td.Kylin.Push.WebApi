@@ -53,7 +53,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        [HttpGet("pushshangmen")]
+        [HttpPost("pushshangmen")]
         [ApiAuthorization]
         public IActionResult PushShangMenOrder(ShangMenOrderCreateContent content)
         {
