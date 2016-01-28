@@ -61,17 +61,6 @@ namespace Td.Kylin.Push.WebApi.Controllers
 
             try
             {
-                content = new ShangMenOrderCreateContent
-                {
-                    Address = "南山区蛇口网谷万维大楼203",
-                    BusinessID = 1241513214543,
-                    Number = 2,
-                    OrderID = 853249,
-                    ServiceName = "空调清洗",
-                    ServiceTime = DateTime.Now.AddDays(5),
-                    Unit = 1,
-                };
-
                 JPushMessage.PushMessage message = new JPushMessage.PushMessage
                 {
                     Content = content,
