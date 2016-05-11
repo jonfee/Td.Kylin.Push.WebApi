@@ -1,11 +1,10 @@
-﻿{
+{
   "webroot": "wwwroot",
   "version": "1.0.0",
 
   "dependencies": {
     "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
-    "Newtonsoft.Json": "7.0.1",
-    "System.Runtime.Serialization.Json": "4.0.1-beta-23516",
+    "Newtonsoft.Json": "8.0.2",
     "System.Text.RegularExpressions": "4.0.11-beta-23516"
   },
 

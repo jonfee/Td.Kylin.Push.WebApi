@@ -112,6 +112,18 @@
         /// <summary>
         /// 员工申请加入公司
         /// </summary>
-        WorkerJoinMerchant = 27
+        WorkerJoinMerchant = 27,
+        /// <summary>
+        /// 用户支付成功
+        /// </summary>
+        PayOrder = 28,
+        /// <summary>
+        /// 商家发货
+        /// </summary>
+        SendOrder = 29,
+        /// <summary>
+        /// 用户确认收货
+        /// </summary>
+        Confirm = 30
     }
 }

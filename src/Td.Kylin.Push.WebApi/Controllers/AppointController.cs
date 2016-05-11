@@ -86,7 +86,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 loger.Write("推送上门订单时异常", ex);
             }
 
-            return KylinOk(success);
+            return Success(success);
         }
 
         /**
@@ -154,7 +154,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 loger.Write("推送预约订单时异常", ex);
             }
 
-            return KylinOk(success);
+            return Success(success);
         }
 
         /**
@@ -224,7 +224,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 loger.Write("指派订单时异常", ex);
             }
 
-            return KylinOk(success);
+            return Success(success);
         }
 
         /**
@@ -294,7 +294,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 loger.Write("接单后推送消息给下单人员时异常", ex);
             }
 
-            return KylinOk(success);
+            return Success(success);
         }
     }
 }

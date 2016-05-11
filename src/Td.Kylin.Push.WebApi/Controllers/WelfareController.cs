@@ -77,7 +77,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 loger.Write("福利中奖消息推送异常", ex);
             }
 
-            return KylinOk(success);
+            return Success(success);
         }
     }
 }
