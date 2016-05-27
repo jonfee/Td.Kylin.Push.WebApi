@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using Td.Kylin.Push.WebApi.JPushMessage.User;
-using Td.Kylin.Push.WebApi.JPushProvider;
-using Td.Kylin.Push.WebApi.Core;
-using Td.Kylin.Push.WebApi.JPushMessage.Merchant;
-using Td.Kylin.Push.WebApi.Loger;
+using Td.Kylin.Push.Messages.User;
+using Td.Kylin.Push.Messages.Merchant;
 using Td.Kylin.WebApi;
 using Td.Kylin.WebApi.Filters;
 
@@ -46,42 +43,30 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *          "Content":"错误详细信息"
          * }
          */
-        /// <summary>
-        /// 福利开奖结果推送（推送给中奖用户）
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost("lottery")]
-        [ApiAuthorization]
-        public IActionResult LotteryResult(WelfareWinnerContent content)
-        {
-            bool success = false;
 
-            try
-            {
-                JPushMessage.PushMessage message = new JPushMessage.PushMessage
-                {
-                    Content = content,
-                    DataID = content.WelfarePhaseID,
-                    DataType = SysEnum.PushDataType.WelfareWinResult,
-                    Title = string.Format("参与的福利活动中奖啦！(奖品：{0})", content.WelfareName)
-                };
+	    /// <summary>
+	    /// 福利开奖结果推送（推送给中奖用户）
+	    /// </summary>
+	    /// <returns></returns>
+	    [HttpPost("lottery")]
+	    [ApiAuthorization]
+	    public IActionResult LotteryResult(WelfareWinnerContent content)
+	    {
+		    var request = new PushRequest
+		    {
+			    //				PushCode = content.PushCode,
+			    DataType = PushDataType.WelfareWinResult,
+				Parameters = content,
+				Message = string.Format("参与的福利活动中奖啦！(奖品：{0})", content.WelfareName)
+		    };
 
-                //推送给用户
-                KylinPushContext context = new KylinPushContext(Configs.JPushConfigs.UserJPushConfig, message);
-                var result = context.Send();
+		    // 推送给用户端。
+		    var response = PushProviderFactory.UserClient.Send(request);
 
-                success = true;
-            }
-            catch (Exception ex)
-            {
-                ExceptionLoger loger = new ExceptionLoger();
-                loger.Write("福利中奖消息推送异常", ex);
-            }
+		    return Success(response.Success);
+	    }
 
-            return Success(success);
-		}
-
-		/**
+	    /**
          * @apiVersion 1.0.0
          * @apiDescription 福利审核结果。
          * @api {post} /v1/welfare/audit 福利审核结果
@@ -112,32 +97,18 @@ namespace Td.Kylin.Push.WebApi.Controllers
 		[ApiAuthorization]
 		public IActionResult WelfareAudit(WelfareAuditPushContent content)
 	    {
-			bool success = false;
-
-			try
+			var request = new PushRequest
 			{
-				JPushMessage.PushMessage message = new JPushMessage.PushMessage
-				{
-					Content = content,
-					DataID = content.MerchantID,
-					DataType = SysEnum.PushDataType.WelfareAudit,
-					Title = content.Contents
-				};
+				//				PushCode = content.PushCode,
+				DataType = PushDataType.WelfareAudit,
+				Parameters = content,
+				Message = content.Contents
+			};
 
-				//推送给用户
-				KylinPushContext context = new KylinPushContext(Configs.JPushConfigs.MerchantJPushConfig, message);
-				var result = context.Send();
+			// 推送给用户端。
+			var response = PushProviderFactory.MerchantClient.Send(request);
 
-				success = true;
-			}
-			catch(Exception ex)
-			{
-				ExceptionLoger loger = new ExceptionLoger();
-				loger.Write("福利审核结果推送异常", ex);
-			}
-
-			return Success(success);
+			return Success(response.Success);
 		}
-
     }
 }

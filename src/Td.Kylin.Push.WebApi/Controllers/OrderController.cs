@@ -4,13 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Td.Kylin.WebApi;
-using Td.Kylin.Push.WebApi.JPushProvider;
-using Td.Kylin.Push.WebApi.Loger;
-using Td.Kylin.Push.WebApi.Core;
 using Td.Kylin.WebApi.Filters;
-using Td.Kylin.Push.WebApi.JPushMessage.Merchant;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using Td.Kylin.Push.Messages.Merchant;
 
 namespace Td.Kylin.Push.WebApi.Controllers
 {
@@ -52,31 +47,18 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult PayOrder(PayMerchantOrderContent content)
         {
-            bool success = false;
+			var request = new PushRequest
+			{
+				//				PushCode = content.PushCode,
+				DataType = PushDataType.PayOrder,
+				Parameters = content,
+				Message = string.Format("用户已经下单付款！(订单号：{0})", content.OrderCode)
+			};
 
-            try
-            {
-                JPushMessage.PushMessage message = new JPushMessage.PushMessage
-                {
-                    Content = content,
-                    DataID = content.OrderID,
-                    DataType = SysEnum.PushDataType.PayOrder,
-                    Title = string.Format("用户已经下单付款！(订单号：{0})", content.OrderCode)
-                };
+			// 推送给商家端。
+			var response = PushProviderFactory.MerchantClient.Send(request);
 
-                //推送给用户
-                KylinPushContext context = new KylinPushContext(Configs.JPushConfigs.UserJPushConfig, message);
-                var result = context.Send();
-
-                success = true;
-            }
-            catch (Exception ex)
-            {
-                ExceptionLoger loger = new ExceptionLoger();
-                loger.Write("用户已经下单付款消息推送异常", ex);
-            }
-
-            return Success(success);
+			return Success(response.Success);
         }
 
 		/**
@@ -114,31 +96,18 @@ namespace Td.Kylin.Push.WebApi.Controllers
 		[ApiAuthorization]
 		public IActionResult SendOrder(SendMerchantOrderContent content)
         {
-			bool success = false;
-
-			try
+			var request = new PushRequest
 			{
-				JPushMessage.PushMessage message = new JPushMessage.PushMessage
-				{
-					Content = content,
-					DataID = content.OrderID,
-					DataType = SysEnum.PushDataType.SendOrder,
-					Title = string.Format("订单已发货！(订单号：{0})", content.OrderCode)
-				};
+				//				PushCode = content.PushCode,
+				DataType = PushDataType.SendOrder,
+				Parameters = content,
+				Message = string.Format("订单已发货！(订单号：{0})", content.OrderCode)
+			};
 
-				//推送给用户
-				KylinPushContext context = new KylinPushContext(Configs.JPushConfigs.MerchantJPushConfig, message);
-				var result = context.Send();
+			// 推送给用户端。
+			var response = PushProviderFactory.UserClient.Send(request);
 
-				success = true;
-			}
-			catch(Exception ex)
-			{
-				ExceptionLoger loger = new ExceptionLoger();
-				loger.Write("订单已发货消息推送异常", ex);
-			}
-
-			return Success(success);
+			return Success(response.Success);
 		}
 
         /// <summary>

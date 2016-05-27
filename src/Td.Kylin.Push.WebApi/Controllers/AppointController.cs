@@ -1,17 +1,10 @@
-﻿using Microsoft.AspNet.Mvc;
-using Newtonsoft.Json;
-using System;
-using System.Collections;
-using Td.Kylin.Push.WebApi.Core;
-using Td.Kylin.Push.WebApi.JPushMessage.Merchant;
-using Td.Kylin.Push.WebApi.JPushMessage.User;
-using Td.Kylin.Push.WebApi.JPushMessage.Worker;
-using Td.Kylin.Push.WebApi.JPushProvider;
-using Td.Kylin.Push.WebApi.Loger;
+﻿using System;
+using Microsoft.AspNet.Mvc;
+using Td.Kylin.Push.Messages.Merchant;
+using Td.Kylin.Push.Messages.User;
+using Td.Kylin.Push.Messages.Worker;
 using Td.Kylin.WebApi;
 using Td.Kylin.WebApi.Filters;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Td.Kylin.Push.WebApi.Controllers
 {
@@ -57,36 +50,20 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult PushShangMenOrder(ShangMenOrderCreateContent content)
         {
-            bool success = false;
+	        var request = new PushRequest
+	        {
+				DataType = PushDataType.ShangMenOrderCreate,
+				Parameters = content,
+				Message = string.Format("{0}({1}{2})", content.ServiceName, content.Number, content.Unit)
+			};
 
-            try
-            {
-                JPushMessage.PushMessage message = new JPushMessage.PushMessage
-                {
-                    Content = content,
-                    DataID = content.OrderID,
-                    DataType = SysEnum.PushDataType.ShangMenOrderCreate,
-                    Filter = new { BusinessID = content.BusinessID },//当前订单的业务ID
-                    Title = string.Format("{0}({1}{2})", content.ServiceName, content.Number, content.Unit)
-                };
+			// 推送给商家端。
+	        var response = PushProviderFactory.MerchantClient.Send(request);
 
-                //推送给商家
-                KylinPushContext merchantContext = new KylinPushContext(Configs.JPushConfigs.MerchantJPushConfig, message);
-                var merchantResult = merchantContext.Send();
+			// 推送给工作端
+	        var response1 = PushProviderFactory.WorkerClient.Send(request);
 
-                //推送给个人服务者
-                KylinPushContext workerContext = new KylinPushContext(Configs.JPushConfigs.WorkerJPushConfig, message);
-                var workerResult = workerContext.Send();
-
-                success = true;
-            }
-            catch (Exception ex)
-            {
-                ExceptionLoger loger = new ExceptionLoger();
-                loger.Write("推送上门订单时异常", ex);
-            }
-
-            return Success(success);
+            return Success(response.Success && response1.Success);
         }
 
         /**
@@ -129,32 +106,18 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult PushYuYueOrder(YuYueOrderCreateContent content)
         {
-            bool success = false;
+			var request = new PushRequest
+			{
+//				PushCode = content.MerchantID,
+				DataType = PushDataType.YuYueOrderCreate,
+				Parameters = content,
+				Message = string.Format("有新的订单！{0}({1}{2})", content.ServiceName, content.Number, content.Unit)
+			};
 
-            try
-            {
-                JPushMessage.PushMessage message = new JPushMessage.PushMessage
-                {
-                    Content = content,
-                    DataID = content.OrderID,
-                    DataType = SysEnum.PushDataType.YuYueOrderCreate,
-                    Filter = new { MerchantID = content.MerchantID },//推送给指定的商户
-                    Title = string.Format("有新的订单！{0}({1}{2})", content.ServiceName, content.Number, content.Unit)
-                };
+			// 推送给商家端。
+			var response = PushProviderFactory.MerchantClient.Send(request);
 
-                //推送给商家
-                KylinPushContext context = new KylinPushContext(Configs.JPushConfigs.MerchantJPushConfig, message);
-                var result = context.Send();
-
-                success = true;
-            }
-            catch (Exception ex)
-            {
-                ExceptionLoger loger = new ExceptionLoger();
-                loger.Write("推送预约订单时异常", ex);
-            }
-
-            return Success(success);
+            return Success(response.Success);
         }
 
         /**
@@ -199,32 +162,18 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult OrderAllot(AppointOrderAllotContent content)
         {
-            bool success = false;
+			var request = new PushRequest
+			{
+				//				PushCode = content.WorkerID,
+				DataType = PushDataType.YuYueOrderCreate,
+				Parameters = content,
+				Message = string.Format("订单：{0}({1}{2})已指派给您", content.ServiceName, content.Number, content.Unit)
+			};
 
-            try
-            {
-                JPushMessage.PushMessage message = new JPushMessage.PushMessage
-                {
-                    Content = content,
-                    DataID = content.OrderID,
-                    DataType = SysEnum.PushDataType.AppointOrderAllot,
-                    Filter = new { WorkerID = content.WorkerID },//推送给指定服务人员
-                    Title = string.Format("订单：{0}({1}{2})已指派给您", content.ServiceName, content.Number, content.Unit)
-                };
+			// 推送给工作端。
+			var response = PushProviderFactory.WorkerClient.Send(request);
 
-                //推送给服务人员
-                KylinPushContext context = new KylinPushContext(Configs.JPushConfigs.WorkerJPushConfig, message);
-                var result = context.Send();
-
-                success = true;
-            }
-            catch (Exception ex)
-            {
-                ExceptionLoger loger = new ExceptionLoger();
-                loger.Write("指派订单时异常", ex);
-            }
-
-            return Success(success);
+			return Success(response.Success);
         }
 
         /**
@@ -269,32 +218,18 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult OrderAccept(AppointOrderAcceptContent content)
         {
-            bool success = false;
+			var request = new PushRequest
+			{
+				//				PushCode = content.UserID,
+				DataType = PushDataType.YuYueOrderCreate,
+				Parameters = content,
+				Message = string.Format("订单：{0}({1}{2})已被接单", content.ServiceName, content.Number, content.Unit)
+			};
 
-            try
-            {
-                JPushMessage.PushMessage message = new JPushMessage.PushMessage
-                {
-                    Content = content,
-                    DataID = content.OrderID,
-                    DataType = SysEnum.PushDataType.AppointOrderChange,
-                    Filter = new { UserID = content.UserID },//推送给下单用户
-                    Title = string.Format("订单：{0}({1}{2})已被接单", content.ServiceName, content.Number, content.Unit)
-                };
+			// 推送给用户端。
+			var response = PushProviderFactory.UserClient.Send(request);
 
-                //推送给服务人员
-                KylinPushContext context = new KylinPushContext(Configs.JPushConfigs.UserJPushConfig, message);
-                var result = context.Send();
-
-                success = true;
-            }
-            catch (Exception ex)
-            {
-                ExceptionLoger loger = new ExceptionLoger();
-                loger.Write("接单后推送消息给下单人员时异常", ex);
-            }
-
-            return Success(success);
+			return Success(response.Success);
         }
     }
 }
