@@ -5,7 +5,8 @@
   "dependencies": {
     "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
     "Newtonsoft.Json": "8.0.2",
-    "System.Text.RegularExpressions": "4.0.11-beta-23516"
+    "System.Text.RegularExpressions": "4.0.11-beta-23516",
+    "Td.Kylin.EnumLibrary": "1.0.37-bata"
   },
 
   "commands": {
