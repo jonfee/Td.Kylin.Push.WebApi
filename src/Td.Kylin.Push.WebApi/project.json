@@ -45,6 +45,7 @@
   ],
   "publishExclude": [
     "**.user",
-    "**.vspscc"
+    "**.vspscc",
+    "config.json"
   ]
 }
