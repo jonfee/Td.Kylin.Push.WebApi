@@ -22,7 +22,7 @@ namespace Td.Kylin.Push.WebApi {
     // (使用 /str 选项)，或重新生成 VS 项目。
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -35,7 +35,7 @@ namespace Td.Kylin.Push.WebApi {
         ///    返回此类使用的缓存 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Td.Kylin.Push.WebApi.Resources", typeof(Resources).GetTypeInfo().Assembly);
@@ -50,7 +50,7 @@ namespace Td.Kylin.Push.WebApi {
         ///    使用此强类型资源类进行资源查找。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -62,16 +62,25 @@ namespace Td.Kylin.Push.WebApi {
         /// <summary>
         ///    查找与 您有一个新的订单,快来报价!(滑动该消息,进入报价界面) 类似的本地化字符串。
         /// </summary>
-        public static string Legwork_AssignOrder_Message {
+        internal static string Legwork_AssignOrder_Message {
             get {
                 return ResourceManager.GetString("Legwork.AssignOrder.Message", resourceCulture);
             }
         }
         
         /// <summary>
+        ///    查找与 物品已送达,请进行支付(滑动该消息,进入该订单的支付页面) 类似的本地化字符串。
+        /// </summary>
+        internal static string Legwork_MessageBuy_Message {
+            get {
+                return ResourceManager.GetString("Legwork.MessageBuy.Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    查找与 您有一个确认订单,快去跑腿吧! 类似的本地化字符串。
         /// </summary>
-        public static string Legwork_OrderConfirm_Message {
+        internal static string Legwork_OrderConfirm_Message {
             get {
                 return ResourceManager.GetString("Legwork.OrderConfirm.Message", resourceCulture);
             }
@@ -80,7 +89,7 @@ namespace Td.Kylin.Push.WebApi {
         /// <summary>
         ///    查找与 &quot;{0}&quot;已成功为您送达物品,记得评价哟! 类似的本地化字符串。
         /// </summary>
-        public static string Legwork_OrderDelivery_Message {
+        internal static string Legwork_OrderDelivery_Message {
             get {
                 return ResourceManager.GetString("Legwork.OrderDelivery.Message", resourceCulture);
             }
@@ -89,7 +98,7 @@ namespace Td.Kylin.Push.WebApi {
         /// <summary>
         ///    查找与 为您优选了最优惠的报价,快去查看(滑动该消息,进行报价确认界面) 类似的本地化字符串。
         /// </summary>
-        public static string Legwork_OrderOffer_Message {
+        internal static string Legwork_OrderOffer_Message {
             get {
                 return ResourceManager.GetString("Legwork.OrderOffer.Message", resourceCulture);
             }
@@ -98,16 +107,16 @@ namespace Td.Kylin.Push.WebApi {
         /// <summary>
         ///    查找与 用户已成功支付,恭喜您完成了该订单. (滑动进入到该订单的详情页面) 类似的本地化字符串。
         /// </summary>
-        public static string Legwork_PaymentComplete_Message {
+        internal static string Legwork_PaymentComplete_Message {
             get {
                 return ResourceManager.GetString("Legwork.PaymentComplete.Message", resourceCulture);
             }
         }
         
         /// <summary>
-        ///    查找与 物品已送达,请进行支付(滑动该消息,进入该订单的支付页面) 类似的本地化字符串。
+        ///    查找与 用户催单了,快点查看一下!(滑动进行到该订单详情页) 类似的本地化字符串。
         /// </summary>
-        public static string Legwork_RequestPayment_Message {
+        internal static string Legwork_RequestPayment_Message {
             get {
                 return ResourceManager.GetString("Legwork.RequestPayment.Message", resourceCulture);
             }

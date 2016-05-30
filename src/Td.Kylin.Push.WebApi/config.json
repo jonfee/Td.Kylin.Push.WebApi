@@ -1,31 +1,31 @@
 ﻿{
-    "ServerId": "S0200",
-    "District": 1,
-    "Platform": 2,
+  "ServerId": "S0200",
+  "District": 1,
+  "Platform": 2,
 
-    "Data": {
-        "SqlType": "mssql",
-        "DefaultConnection": {
-            // "ConnectionString": "data source=192.168.1.244;initial catalog=Kylin.Test;persist security info=True;user id=sa;password=sa123456;MultipleActiveResultSets=True;"
-            "ConnectionString": "data source=192.168.1.200;initial catalog=kylintest;persist security info=True;user id=kylintest;password=123456;MultipleActiveResultSets=True;"
-        }
-    },
-
-    "Push": {
-        "UserClient": {
-            "Key": "21b409f4b082304e3cba8aa3",
-            "Secret": "3195632662e786ab0dde18b7",
-            "Provider": "Td.Kylin.Push.UserClientPushProvider, Td.Kylin.Push.WebApi"
-        },
-        "MerchantClient": {
-            "Key": "21b409f4b082304e3cba8aa3",
-            "Secret": "3195632662e786ab0dde18b7",
-            "Provider": "Td.Kylin.Push.MerchantClientPushProvider, Td.Kylin.Push.WebApi"
-        },
-        "WorkerClient": {
-            "Key": "21b409f4b082304e3cba8aa3",
-            "Secret": "3195632662e786ab0dde18b7",
-            "Provider": "Td.Kylin.Push.WorkerClientPushProvider, Td.Kylin.Push.WebApi"
-        }
+  "Data": {
+    "SqlType": "mssql",
+    "DefaultConnection": {
+      // "ConnectionString": "data source=192.168.1.244;initial catalog=Kylin.Test;persist security info=True;user id=sa;password=sa123456;MultipleActiveResultSets=True;"
+      "ConnectionString": "data source=139.129.194.132;initial catalog=kylintest;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
     }
+  },
+
+  "Push": {
+    "UserClient": {
+      "Key": "21b409f4b082304e3cba8aa3",
+      "Secret": "3195632662e786ab0dde18b7",
+      "Provider": "Td.Kylin.Push.UserClientPushProvider, Td.Kylin.Push.WebApi"
+    },
+    "MerchantClient": {
+      "Key": "21b409f4b082304e3cba8aa3",
+      "Secret": "3195632662e786ab0dde18b7",
+      "Provider": "Td.Kylin.Push.MerchantClientPushProvider, Td.Kylin.Push.WebApi"
+    },
+    "WorkerClient": {
+      "Key": "21b409f4b082304e3cba8aa3",
+      "Secret": "3195632662e786ab0dde18b7",
+      "Provider": "Td.Kylin.Push.WorkerClientPushProvider, Td.Kylin.Push.WebApi"
+    }
+  }
 }

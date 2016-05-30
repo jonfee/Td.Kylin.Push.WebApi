@@ -120,6 +120,9 @@
   <data name="Legwork.AssignOrder.Message" xml:space="preserve">
     <value>您有一个新的订单,快来报价!(滑动该消息,进入报价界面)</value>
   </data>
+  <data name="Legwork.MessageBuy.Message" xml:space="preserve">
+    <value>物品已送达,请进行支付(滑动该消息,进入该订单的支付页面)</value>
+  </data>
   <data name="Legwork.OrderConfirm.Message" xml:space="preserve">
     <value>您有一个确认订单,快去跑腿吧!</value>
   </data>
@@ -133,6 +136,6 @@
     <value>用户已成功支付,恭喜您完成了该订单. (滑动进入到该订单的详情页面)</value>
   </data>
   <data name="Legwork.RequestPayment.Message" xml:space="preserve">
-    <value>物品已送达,请进行支付(滑动该消息,进入该订单的支付页面)</value>
+    <value>用户催单了,快点查看一下!(滑动进行到该订单详情页)</value>
   </data>
 </root>

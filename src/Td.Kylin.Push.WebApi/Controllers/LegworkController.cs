@@ -3,6 +3,7 @@ using Microsoft.AspNet.Mvc;
 using Td.Kylin.WebApi;
 using Td.Kylin.WebApi.Filters;
 using Td.Kylin.Push.Messages.Legwork;
+using Td.Kylin.Push.WebApi.Messages.Legwork;
 
 namespace Td.Kylin.Push.WebApi.Controllers
 {
@@ -304,5 +305,53 @@ namespace Td.Kylin.Push.WebApi.Controllers
 
 			return Success(response.Success);
 		}
-	}
+
+        /**
+         * @apiVersion 1.0.0
+         * @apiDescription 用户线上支付成功,提醒购买（用户催单）
+         * @api {post} /v1/legwork/msgbuy 提醒购买（用户催单）
+         * @apiSampleRequest /v1/legwork/msgbuy
+         * @apiName PaymentComplete
+         * @apiGroup Legwork
+         * @apiPermission All
+         *
+         * @apiParam {string} PushCode 需要推送给用户端的推送号。
+         * @apiParam {long} OrderID 订单ID。
+         * @apiParam {string} OrderCode 订单编号。
+         * @apiParam {datetime} CreateTime 催单时间
+         *
+         * @apiSuccessExample 正常输出：
+         * {
+		 *	  "Code": 0,
+		 *	  "Message": null,
+		 *	  "IsError": false,
+		 *	  "Content": true
+		 * }
+         *
+         * @apiErrorExample 错误输出:
+         * {
+         *    "Code":错误代号,
+         *    "Message":"错误标题",
+         *    "Content":"错误详细信息"
+         * }
+         */
+        [HttpPost("msgbuy")]
+        [ApiAuthorization]
+        public IActionResult MessageBuy(MessageBuyPushContent content)
+        {
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                PushType = PushType.Notification,
+                DataType = PushDataType.Legwork_MessageBuy,
+                Parameters = content,
+                Message = Configs.GetResource("${Legwork.MessageBuy.Message}")
+            };
+
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request);
+
+            return Success(response.Success);
+        }
+    }
 }
