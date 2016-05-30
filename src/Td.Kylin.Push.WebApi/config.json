@@ -13,13 +13,13 @@
 
   "Push": {
     "UserClient": {
-      "Key": "21b409f4b082304e3cba8aa3",
-      "Secret": "3195632662e786ab0dde18b7",
+      "Key": "ff9dc965ce633a1083118e92",
+      "Secret": "b3100ea107e29a3d2155b135",
       "Provider": "Td.Kylin.Push.UserClientPushProvider, Td.Kylin.Push.WebApi"
     },
     "MerchantClient": {
-      "Key": "21b409f4b082304e3cba8aa3",
-      "Secret": "3195632662e786ab0dde18b7",
+      "Key": "14e822d07fead839b74bb987",
+      "Secret": "7bcc76464c6a8e3c8d842621",
       "Provider": "Td.Kylin.Push.MerchantClientPushProvider, Td.Kylin.Push.WebApi"
     },
     "WorkerClient": {
