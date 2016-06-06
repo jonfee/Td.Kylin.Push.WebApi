@@ -18,7 +18,7 @@ namespace JPush.Api.push.mode
     {
 
         private JsonSerializerSettings jSetting;
-        private const  String PLATFORM = "platform";
+        private const String PLATFORM = "platform";
         private const String AUDIENCE = "audience";
         private const String NOTIFICATION = "notification";
         private const String MESSAGE = "message";
@@ -29,9 +29,9 @@ namespace JPush.Api.push.mode
 
         //serializaiton property
         [JsonConverter(typeof(PlatformConverter))]
-        public Platform platform{get;set;}
+        public Platform platform { get; set; }
         [JsonConverter(typeof(AudienceConverter))]
-        public Audience audience{get;set;}
+        public Audience audience { get; set; }
         public Notification notification { get; set; }
         public Message message { get; set; }
         public Options options { get; set; }
@@ -43,6 +43,7 @@ namespace JPush.Api.push.mode
             notification = null;
             message = null;
             options = new Options();
+            options.apns_production = true;//修复极光3.0版本--苹果生产环境
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
@@ -78,7 +79,7 @@ namespace JPush.Api.push.mode
         //*/
         public static PushPayload MessageAll(String msgContent)
         {
-            return new PushPayload( Platform.all(),
+            return new PushPayload(Platform.all(),
                                    Audience.all(),
                                    null,
                                    Message.content(msgContent),
@@ -117,7 +118,7 @@ namespace JPush.Api.push.mode
             }
             this.options.time_to_live = timeToLive;
         }
-        public int  GetSendno()
+        public int GetSendno()
         {
             if (this.options != null)
                 return this.options.sendno;
@@ -126,10 +127,10 @@ namespace JPush.Api.push.mode
         public bool IsGlobalExceedLength()
         {
             int messageLength = 0;
-            if (message!= null)
+            if (message != null)
             {
-               var messageJson = JsonConvert.SerializeObject(this.message, jSetting);
-               messageLength += UTF8Encoding.UTF8.GetBytes(messageJson).Length;
+                var messageJson = JsonConvert.SerializeObject(this.message, jSetting);
+                messageLength += UTF8Encoding.UTF8.GetBytes(messageJson).Length;
             }
             if (this.notification == null)
             {
@@ -144,7 +145,7 @@ namespace JPush.Api.push.mode
                 }
                 return messageLength > MAX_GLOBAL_ENTITY_LENGTH;
             }
-           
+
         }
         public bool IsIosExceedLength()
         {
@@ -160,7 +161,7 @@ namespace JPush.Api.push.mode
                 }
                 else
                 {
-                    if (!(this.notification.alert==null))
+                    if (!(this.notification.alert == null))
                     {
                         string jsonText;
                         using (StringWriter sw = new StringWriter())
@@ -176,10 +177,10 @@ namespace JPush.Api.push.mode
                     {
                         // No iOS Payload
                     }
-                   
+
 
                 }
-                
+
             }
             return false;
         }
@@ -191,7 +192,7 @@ namespace JPush.Api.push.mode
         {
             Preconditions.checkArgument(!(null == audience || null == platform), "audience and platform both should be set.");
             Preconditions.checkArgument(!(null == notification && null == message), "notification or message should be set at least one.");
-            if (audience!=null)
+            if (audience != null)
             {
                 audience.Check();
             }
