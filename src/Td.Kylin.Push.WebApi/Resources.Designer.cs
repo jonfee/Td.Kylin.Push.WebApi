@@ -69,7 +69,7 @@ namespace Td.Kylin.Push.WebApi {
         }
         
         /// <summary>
-        ///    查找与 物品已送达,请进行支付(滑动该消息,进入该订单的支付页面) 类似的本地化字符串。
+        ///    查找与 用户催单了,快点查看一下!(滑动进行到该订单详情页) 类似的本地化字符串。
         /// </summary>
         internal static string Legwork_MessageBuy_Message {
             get {
@@ -114,7 +114,7 @@ namespace Td.Kylin.Push.WebApi {
         }
         
         /// <summary>
-        ///    查找与 用户催单了,快点查看一下!(滑动进行到该订单详情页) 类似的本地化字符串。
+        ///    查找与 物品已送达,请进行支付(滑动该消息,进入该订单的支付页面) 类似的本地化字符串。
         /// </summary>
         internal static string Legwork_RequestPayment_Message {
             get {
