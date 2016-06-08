@@ -8,10 +8,15 @@ namespace Td.Kylin.Push.Messages.Legwork
 	/// </summary>
     public class OrderOfferPushContent
     {
-		/// <summary>
-		/// 需要推送给用户端的推送号。
-		/// </summary>
-		public string PushCode
+        public string Title
+        {
+            get;
+            set;
+        }
+        /// <summary>
+        /// 需要推送给用户端的推送号。
+        /// </summary>
+        public string PushCode
 		{
 			get;
 			set;
