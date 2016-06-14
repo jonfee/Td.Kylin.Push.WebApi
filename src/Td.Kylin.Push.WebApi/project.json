@@ -22,6 +22,7 @@
     "Td.AspNet.WebApi": "1.0.0-*",
     "Td.CoreLibrary": "1.1.4-beta",
     "Td.Kylin.EnumLibrary": "1.0.37-bata",
+    "Td.Kylin.Push.Data": "1.0.0-*",
     "Td.Kylin.WebApi": "1.0.0-*"
   },
 

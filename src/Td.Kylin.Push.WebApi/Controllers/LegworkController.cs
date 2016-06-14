@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.AspNet.Mvc;
+using Td.Kylin.EnumLibrary;
 using Td.Kylin.WebApi;
 using Td.Kylin.WebApi.Filters;
 using Td.Kylin.Push.Messages.Legwork;
 using Td.Kylin.Push.WebApi.Messages.Legwork;
+using Td.Kylin.Push.Data;
 
 namespace Td.Kylin.Push.WebApi.Controllers
 {
@@ -96,21 +98,27 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult OrderOffer(OrderOfferPushContent content)
         {
-            var title = Configs.GetResource("${Legwork.OrderOffer.Message}");
-            content.Title = title;
-            var request = new PushRequest
+            var Model = ServicesProvider.Items.LegworkOrderServices.GetModel(content.OrderID);
+            if (null != Model && Model.Status != (int)LegworkOrderStatus.Canceled)
             {
-                PushCode = content.PushCode,
-                PushType = PushType.Notification,
-                DataType = PushDataType.Legwork_OrderOffer,
-                Parameters = content,
-                Message = title
-            };
 
-            // 推送给用户端。
-            var response = PushProviderFactory.UserClient.Send(request);
+                var title = Configs.GetResource("${Legwork.OrderOffer.Message}");
+                content.Title = title;
+                var request = new PushRequest
+                {
+                    PushCode = content.PushCode,
+                    PushType = PushType.Notification,
+                    DataType = PushDataType.Legwork_OrderOffer,
+                    Parameters = content,
+                    Message = title
+                };
 
-            return Success(response.Success);
+                // 推送给用户端。
+                var response = PushProviderFactory.UserClient.Send(request);
+
+                return Success(response.Success);
+            }
+            return Success("");
         }
 
         /**
