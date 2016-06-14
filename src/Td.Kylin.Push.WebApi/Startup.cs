@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using Td.Common;
 using Td.Diagnostics;
 using Td.Kylin.EnumLibrary;
 using Td.Kylin.Push.Data.Context;
@@ -79,7 +80,7 @@ namespace Td.Kylin.Push.WebApi
                         return SqlProviderType.SqlServer;
                 }
             }).Invoke();
-
+            Config.apnsProduction = Converter.ConvertValue<bool>(Configuration["Data:Environment"]);
             var connectionString = Configuration["Data:DefaultConnection:ConnectionString"];
             app.UsePushDataContext(connectionString, sqlType);
             app.UseKylinWebApi(Configuration["ServerId"], connectionString, sqlType);

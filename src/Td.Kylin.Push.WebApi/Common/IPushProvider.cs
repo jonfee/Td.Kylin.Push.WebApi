@@ -5,11 +5,11 @@ namespace Td.Kylin.Push
 {
     public interface IPushProvider
     {
-	    string Name
-	    {
-		    get;
-	    }
+        string Name
+        {
+            get;
+        }
 
-	    PushResponse Send(PushRequest message);
+        PushResponse Send(PushRequest message, bool apnsProduction = false);
     }
 }

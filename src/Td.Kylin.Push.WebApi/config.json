@@ -7,8 +7,10 @@
     "SqlType": "mssql",
     "DefaultConnection": {
       // "ConnectionString": "data source=192.168.1.244;initial catalog=Kylin.Test;persist security info=True;user id=sa;password=sa123456;MultipleActiveResultSets=True;"
-      "ConnectionString": "data source=139.129.194.132;initial catalog=kylintest;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
-    }
+      "ConnectionString": "data source=139.129.194.132;initial catalog=kylin_test;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
+    },
+    //ios false生成环境  true为开发环境
+    "Environment": "true"
   },
 
   "Push": {

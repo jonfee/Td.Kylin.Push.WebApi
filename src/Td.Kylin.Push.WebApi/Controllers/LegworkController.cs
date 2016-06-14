@@ -56,8 +56,9 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 Parameters = content,
                 Message = title
             };
+
             // 推送给工作端。
-            var response = PushProviderFactory.WorkerClient.Send(request);
+            var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
 
             return Success(response.Success);
         }
@@ -114,7 +115,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 };
 
                 // 推送给用户端。
-                var response = PushProviderFactory.UserClient.Send(request);
+                var response = PushProviderFactory.UserClient.Send(request, Config.apnsProduction);
 
                 return Success(response.Success);
             }
@@ -166,7 +167,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
             };
 
             // 推送给工作端。
-            var response = PushProviderFactory.WorkerClient.Send(request);
+            var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
 
             return Success(response.Success);
         }
@@ -217,7 +218,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
             };
 
             // 推送给用户端。
-            var response = PushProviderFactory.UserClient.Send(request);
+            var response = PushProviderFactory.UserClient.Send(request, Config.apnsProduction);
 
             return Success(response.Success);
         }
@@ -270,7 +271,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
             };
 
             // 推送给用户端。
-            var response = PushProviderFactory.UserClient.Send(request);
+            var response = PushProviderFactory.UserClient.Send(request, Config.apnsProduction);
 
             return Success(response.Success);
         }
@@ -321,7 +322,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
             };
 
             // 推送给工作端。
-            var response = PushProviderFactory.WorkerClient.Send(request);
+            var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
 
             return Success(response.Success);
         }
@@ -371,7 +372,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
             };
 
             // 推送给工作端。
-            var response = PushProviderFactory.WorkerClient.Send(request);
+            var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
 
             return Success(response.Success);
         }
