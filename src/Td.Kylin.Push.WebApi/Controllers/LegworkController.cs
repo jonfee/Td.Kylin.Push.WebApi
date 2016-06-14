@@ -95,7 +95,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
          * }
          */
         [HttpPost("order_offer")]
-        //[ApiAuthorization]
+        [ApiAuthorization]
         public IActionResult OrderOffer(OrderOfferPushContent content)
         {
             var Model = ServicesProvider.Items.LegworkOrderServices.GetModel(content.OrderID);
