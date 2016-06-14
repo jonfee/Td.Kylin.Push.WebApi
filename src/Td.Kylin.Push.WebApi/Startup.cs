@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Td.Diagnostics;
 using Td.Kylin.EnumLibrary;
+using Td.Kylin.Push.Data.Context;
 using Td.Kylin.WebApi;
 using Td.Web;
 
@@ -80,7 +81,7 @@ namespace Td.Kylin.Push.WebApi
             }).Invoke();
 
             var connectionString = Configuration["Data:DefaultConnection:ConnectionString"];
-
+            app.UsePushDataContext(connectionString, sqlType);
             app.UseKylinWebApi(Configuration["ServerId"], connectionString, sqlType);
 
             // 注册推送提供程序。

@@ -9,7 +9,7 @@ namespace Td.Kylin.Push.Data.Context
     /// </summary>
     public static class DataContextInjection
     {
-        public static IApplicationBuilder UseMicroMallDataContext(this IApplicationBuilder builder, string connectionString, SqlProviderType sqlType)
+        public static IApplicationBuilder UsePushDataContext(this IApplicationBuilder builder, string connectionString, SqlProviderType sqlType)
         {
             if (builder == null)
             {
