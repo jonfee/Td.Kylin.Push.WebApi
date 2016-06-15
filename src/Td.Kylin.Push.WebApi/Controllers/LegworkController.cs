@@ -42,7 +42,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
          * }
          */
         [HttpPost("assign_order")]
-        [ApiAuthorization]
+        //[ApiAuthorization]
         public IActionResult AssignOrder(AssignOrderPushContent content)
         {
             var title = Configs.GetResource("${Legwork.AssignOrder.Message}");

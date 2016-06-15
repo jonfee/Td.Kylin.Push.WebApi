@@ -10,7 +10,7 @@
       "ConnectionString": "data source=139.129.194.132;initial catalog=kylin_test;persist security info=True;user id=kylintest;password=kylintest++;MultipleActiveResultSets=True;"
     },
     //ios false生成环境  true为开发环境
-    "Environment": "true"
+    "Environment": "false"
   },
 
   "Push": {

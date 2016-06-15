@@ -70,7 +70,7 @@ namespace Td.Kylin.Push
 
             try
             {
-                var payload = this.GetPayload(request);
+                var payload = this.GetPayload(request, apnsProduction);
                 var result = this.Client.SendPush(payload);
 
                 response.Success = result.isResultOK();
