@@ -214,5 +214,9 @@
         /// 提醒购买
         /// </summary>
         Legwork_MessageBuy = 42,
+        /// <summary>
+        /// 用户催单
+        /// </summary>
+        UserMessageBuy = 43,
     }
 }

@@ -6,13 +6,14 @@ using Microsoft.AspNet.Mvc;
 using Td.Kylin.WebApi;
 using Td.Kylin.WebApi.Filters;
 using Td.Kylin.Push.Messages.Merchant;
+using Td.Kylin.Push.WebApi.Messages.Merchant;
 
 namespace Td.Kylin.Push.WebApi.Controllers
 {
-	[Route("v1/merchant")]
-	public class MerchantController : BaseController
-	{
-		/**
+    [Route("v1/merchant")]
+    public class MerchantController : BaseController
+    {
+        /**
 		 * @apiVersion 1.0.0
 		 * @apiDescription 商家审核结果。
 		 * @api {post} /v1/merchant/audit 商家审核结果
@@ -35,26 +36,71 @@ namespace Td.Kylin.Push.WebApi.Controllers
 		 *          "Content":"错误详细信息"
 		 * }
 		 */
-		/// <summary>
-		/// 商家审核结果（推送给商家端）
-		/// </summary>
-		/// <returns></returns>
-		[HttpPost("audit")]
-		[ApiAuthorization]
-		public IActionResult MerchantAudit(MerchantAuditPushContent content)
-		{
-			var request = new PushRequest
-			{
-//				PushCode = content.PushCode,
-				DataType = PushDataType.MerchantAudit,
-				Parameters = content,
-				Message = content.Contents
-			};
+        /// <summary>
+        /// 商家审核结果（推送给商家端）
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("audit")]
+        [ApiAuthorization]
+        public IActionResult MerchantAudit(MerchantAuditPushContent content)
+        {
+            var request = new PushRequest
+            {
+                //				PushCode = content.PushCode,
+                DataType = PushDataType.MerchantAudit,
+                Parameters = content,
+                Message = content.Contents
+            };
 
-			// 推送给商家端。
-			var response = PushProviderFactory.MerchantClient.Send(request);
+            // 推送给商家端。
+            var response = PushProviderFactory.MerchantClient.Send(request);
 
-			return Success(response.Success);
-		}
-	}
+            return Success(response.Success);
+        }
+
+        /**
+		 * @apiVersion 1.0.0
+		 * @apiDescription 用户催单推送给商家端
+		 * @api {post} /v1/merchant/megbuy 用户催单推送给商家端
+		 * @apiSampleRequest /v1/merchant/megbuy
+		 * @apiName MessageBuy
+		 * @apiGroup Merchant
+		 * @apiPermission All
+		 *
+		 * @apiParam {long} MerchantID 商家ID
+		 * @apiParam {int} AuditStatus 审核状态
+		 * @apiParam {string} Contents 内容
+		 *
+		 * @apiSuccessExample 正常输出：
+		 * 推送结果[Boolean]，True表示推送成功，Flase表示失败
+		 *
+		 * @apiErrorExample 错误输出:
+		 * {
+		 *          "Code":错误代号,
+		 *          "Message":"错误标题",
+		 *          "Content":"错误详细信息"
+		 * }
+		 */
+        /// <summary>
+        /// 用户催单推送给商家端
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("megbuy")]
+        [ApiAuthorization]
+        public IActionResult MessageBuy(UserMessageBuyContent content)
+        {
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.UserMessageBuy,
+                Parameters = content,
+                Message = content.Content
+            };
+
+            // 推送给商家端。
+            var response = PushProviderFactory.MerchantClient.Send(request);
+
+            return Success(response.Success);
+        }
+    }
 }
