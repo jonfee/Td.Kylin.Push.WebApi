@@ -7,6 +7,7 @@ namespace Td.Kylin.Push.Messages.Merchant
 {
     public class SendMerchantOrderContent
     {
+        public string PushCode { get; set; }
         /// <summary>
         /// 订单ID
         /// </summary>

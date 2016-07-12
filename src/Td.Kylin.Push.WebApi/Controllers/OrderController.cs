@@ -49,7 +49,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         {
 			var request = new PushRequest
 			{
-				//				PushCode = content.PushCode,
+							PushCode = content.PushCode,
 				DataType = PushDataType.PayOrder,
 				Parameters = content,
 				Message = string.Format("用户已经下单付款！(订单号：{0})", content.OrderCode)
@@ -98,7 +98,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         {
 			var request = new PushRequest
 			{
-				//				PushCode = content.PushCode,
+				PushCode = content.PushCode,
 				DataType = PushDataType.SendOrder,
 				Parameters = content,
 				Message = string.Format("订单已发货！(订单号：{0})", content.OrderCode)
@@ -116,6 +116,16 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /// <returns></returns>
         public IActionResult ConfirmOrder()
         {
+            //var request = new PushRequest
+            //{
+            //    PushCode = content.PushCode,
+            //    DataType = PushDataType.SendOrder,
+            //    Parameters = content,
+            //    Message = string.Format("订单已发货！(订单号：{0})", content.OrderCode)
+            //};
+
+            // 推送给用户端。
+            //var response = PushProviderFactory.UserClient.Send(request);
             return Success("");
         }
     }
