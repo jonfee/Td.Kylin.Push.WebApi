@@ -57,7 +57,7 @@ namespace Td.Kylin.Push.WebApi
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new Td.Web.Filters.HandleExceptionFilter());
-                options.Filters.Add(new Td.Kylin.WebApi.Filters.HandleArgumentFilter());
+               // options.Filters.Add(new Td.Kylin.WebApi.Filters.HandleArgumentFilter());
             });
 
             // Add framework services.
