@@ -102,7 +102,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
                 PushCode = content.PushCode,
                 DataType = PushDataType.UserMessageBuy,
                 Parameters = content,
-                Message = content.Contents
+                Message = "用户催单：订单编号【" + content.OrderCode + "】"
             };
 
 
