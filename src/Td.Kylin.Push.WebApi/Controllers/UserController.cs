@@ -42,9 +42,17 @@ namespace Td.Kylin.Push.WebApi.Controllers
 		[ApiAuthorization]
 		public IActionResult UserAudit(UserAuditPushContent content)
 		{
+		    //content = new UserAuditPushContent()
+		    //{
+      //          PushCode = "021E6DD4C21330EB",
+      //          UserID=123456,
+      //          AuditStatus = 1,
+      //          Contents = "测试"
+      //      };
+
 			var request = new PushRequest
 			{
-				//				PushCode = content.PushCode,
+				PushCode = content.PushCode,
 				DataType = PushDataType.UserAudit,
 				Parameters = content,
 				Message = content.Contents

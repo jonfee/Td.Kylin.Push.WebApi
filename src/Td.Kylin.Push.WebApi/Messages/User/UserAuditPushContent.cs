@@ -7,6 +7,7 @@ namespace Td.Kylin.Push.Messages.User
 {
 	public class UserAuditPushContent
 	{
+        public string PushCode { get; set; }
 		/// <summary>
 		/// 用户ID
 		/// </summary>

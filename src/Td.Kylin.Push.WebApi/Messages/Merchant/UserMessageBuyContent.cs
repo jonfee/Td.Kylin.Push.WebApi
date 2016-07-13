@@ -30,7 +30,7 @@ namespace Td.Kylin.Push.WebApi.Messages.Merchant
             get;
             set;
         }
-        public string Content { get; set; }
+        public string Contents{ get; set; }
 
     }
 }

@@ -89,13 +89,23 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult MessageBuy(UserMessageBuyContent content)
         {
+            //content = new UserMessageBuyContent()
+            //{
+            //    PushCode = "ABA716DD6A03418B",
+            //    OrderID = 6306769615716417538,
+            //    CreateTime = DateTime.Now,
+            //    OrderCode = "216071319270969293",
+            //    Contents = "用户催单"
+            //};
             var request = new PushRequest
             {
                 PushCode = content.PushCode,
                 DataType = PushDataType.UserMessageBuy,
                 Parameters = content,
-                Message = content.Content
+                Message = content.Contents
             };
+
+
 
             // 推送给商家端。
             var response = PushProviderFactory.MerchantClient.Send(request);
