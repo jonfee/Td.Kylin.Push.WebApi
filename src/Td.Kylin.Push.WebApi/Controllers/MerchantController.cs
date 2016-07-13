@@ -61,8 +61,8 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /**
 		 * @apiVersion 1.0.0
 		 * @apiDescription 用户催单推送给商家端
-		 * @api {post} /v1/merchant/megbuy 用户催单推送给商家端
-		 * @apiSampleRequest /v1/merchant/megbuy
+		 * @api {post} v1/merchant/msgbuy 用户催单推送给商家端
+		 * @apiSampleRequest v1/merchant/msgbuy
 		 * @apiName MessageBuy
 		 * @apiGroup Merchant
 		 * @apiPermission All
@@ -85,7 +85,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /// 用户催单推送给商家端
         /// </summary>
         /// <returns></returns>
-        [HttpPost("megbuy")]
+        [HttpPost("msgbuy")]
         [ApiAuthorization]
         public IActionResult MessageBuy(UserMessageBuyContent content)
         {
