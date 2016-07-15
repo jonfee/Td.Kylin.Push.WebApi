@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("JPush.Api")]
+[assembly: AssemblyProduct("Td.Kylin.Push")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4eb3edd4-9540-4a32-a134-1f6c2cf5c208")]
+[assembly: Guid("f4d3e8e4-f402-4f65-8fd1-733c5a3e4b44")]
