@@ -25,7 +25,7 @@ namespace Td.Kylin.Push.WebApi
             // 启动应用程序。
             Application.Start(new ApplicationContext(env), null);
 
-            var builder = new ConfigurationBuilder().AddJsonFile("config.json").AddEnvironmentVariables();
+            var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath).AddJsonFile("config.json").AddEnvironmentVariables();
 
             Configuration = builder.Build();
 

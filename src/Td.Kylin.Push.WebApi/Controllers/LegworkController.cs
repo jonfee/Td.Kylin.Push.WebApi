@@ -50,7 +50,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
 
             var request = new PushRequest
             {
-                PushCode = content.PushCode,
+                PushCode =content.PushCode,// "7BD28C708F05272F",
                 PushType = PushType.Notification,
                 DataType = PushDataType.Legwork_AssignOrder,
                 Parameters = content,
