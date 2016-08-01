@@ -218,5 +218,9 @@
         /// 用户催单
         /// </summary>
         UserMessageBuy = 43,
+        /// <summary>
+        /// B2C下单走跑腿流程推送给工作端
+        /// </summary>
+        MallLegworkerPush = 44,
     }
 }

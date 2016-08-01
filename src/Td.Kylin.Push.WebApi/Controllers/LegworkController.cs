@@ -376,5 +376,54 @@ namespace Td.Kylin.Push.WebApi.Controllers
 
             return Success(response.Success);
         }
+        /**
+         * @apiVersion 1.0.0
+         * @apiDescription B2C下单走跑腿流程推送给工作端
+         * @api {post} /v1/legwork/mall B2C下单走跑腿流程推送给工作端
+         * @apiSampleRequest /v1/legwork/mall
+         * @apiName PaymentComplete
+         * @apiGroup Legwork
+         * @apiPermission All
+         *
+         * @apiParam {string} PushCode 需要推送给用户端的推送号。
+         * @apiParam {long} OrderID 订单ID。
+         * @apiParam {string} OrderCode 订单编号。
+         * @apiParam {datetime} CreateTime 催单时间
+         *
+         * @apiSuccessExample 正常输出：
+         * {
+		 *	  "Code": 0,
+		 *	  "Message": null,
+		 *	  "IsError": false,
+		 *	  "Content": true
+		 * }
+         *
+         * @apiErrorExample 错误输出:
+         * {
+         *    "Code":错误代号,
+         *    "Message":"错误标题",
+         *    "Content":"错误详细信息"
+         * }
+         */
+        [HttpPost("mall")]
+        [ApiAuthorization]
+        public IActionResult MallLegworkerPush(AssignOrderPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.MallLegworkerPush.Message}");
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                PushType = PushType.Notification,
+                DataType = PushDataType.MallLegworkerPush,
+                Parameters = content,
+                Message = title
+            };
+
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
+
+            return Success(response.Success);
+        }
     }
 }
