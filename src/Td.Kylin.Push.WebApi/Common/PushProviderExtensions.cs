@@ -10,7 +10,7 @@ namespace Td.Kylin.Push
 {
     public static class PushProviderExtensions
     {
-	    public static IApplicationBuilder RegisterPushProvider(this IApplicationBuilder builder, IConfigurationRoot configuration)
+	    public static void RegisterPushProvider(IConfigurationRoot configuration)
 	    {
 			foreach(var section in configuration.GetSection("Push").GetChildren())
 			{
@@ -25,8 +25,6 @@ namespace Td.Kylin.Push
 
 				PushProviderFactory.Register(instance);
 			}
-
-			return builder;
 	    }
     }
 }

@@ -20,6 +20,9 @@ namespace Td.Kylin.Push.WebApi
 {
     public class Startup
     {
+        private static SqlProviderType _sqlType;
+        private static string _sqlConn;
+
         public Startup(IHostingEnvironment env)
         {
             // 启动应用程序。
@@ -30,6 +33,27 @@ namespace Td.Kylin.Push.WebApi
             Configuration = builder.Build();
 
             WebRootPath = env.WebRootPath;
+
+            _sqlType = new Func<SqlProviderType>(() =>
+            {
+                string sqltype = Configuration["Data:SqlType"] ?? string.Empty;
+
+                switch (sqltype.ToLower())
+                {
+                    case "npgsql":
+                        return SqlProviderType.NpgSQL;
+                    case "mssql":
+                    default:
+                        return SqlProviderType.SqlServer;
+                }
+            }).Invoke();
+            Config.apnsProduction = Converter.ConvertValue<bool>(Configuration["Data:Environment"]);
+            _sqlConn = Configuration["Data:DefaultConnection:ConnectionString"];
+
+            PushDataContextExtensions.Factory(_sqlConn, _sqlType);
+
+            // 注册推送提供程序。
+            PushProviderExtensions.RegisterPushProvider(Configuration);
         }
 
         /// <summary>
@@ -70,27 +94,10 @@ namespace Td.Kylin.Push.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            var sqlType = new Func<SqlProviderType>(() =>
-            {
-                string sqltype = Configuration["Data:SqlType"] ?? string.Empty;
-
-                switch (sqltype.ToLower())
-                {
-                    case "npgsql":
-                        return SqlProviderType.NpgSQL;
-                    case "mssql":
-                    default:
-                        return SqlProviderType.SqlServer;
-                }
-            }).Invoke();
             Config.apnsProduction = Converter.ConvertValue<bool>(Configuration["Data:Environment"]);
-            var connectionString = Configuration["Data:DefaultConnection:ConnectionString"];
-            app.UsePushDataContext(connectionString, sqlType);
-            app.UseKylinWebApi(Configuration["ServerId"], connectionString, sqlType);
 
-            // 注册推送提供程序。
-            app.RegisterPushProvider(Configuration);
-
+            app.UseKylinWebApi(Configuration["ServerId"], _sqlConn, _sqlType);
+            
             //app.UseIISPlatformHandler();
 
             app.UseStaticFiles();
