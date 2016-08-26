@@ -4,9 +4,9 @@
     "JPush.Api": "1.1.0",
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
-    "Td.CoreLibrary": "1.2.5",
-    "Td.Kylin.Entity": "1.1.9",
-    "Td.Kylin.EnumLibrary": "1.2.1"
+    "Td.CoreLibrary": "1.2.7",
+    "Td.Kylin.Entity": "1.2.10",
+    "Td.Kylin.EnumLibrary": "1.2.10"
   },
   "frameworks": {
     "net461": {}

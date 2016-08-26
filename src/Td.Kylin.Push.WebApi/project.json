@@ -14,7 +14,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Td.Kylin.Push": "1.1.0",
-    "Td.Kylin.WebApi": "1.1.10",
+    "Td.Kylin.WebApi": "1.1.13",
     "Td.Web": "1.1.4"
   },
 
