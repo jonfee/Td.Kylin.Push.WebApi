@@ -6,25 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Td.Kylin.WebApi;
 using Td.Kylin.WebApi.Filters;
 using Td.Kylin.Push.Messages.Topic;
+using Td.Kylin.Push.WebApi.Messages.Topic;
 
 namespace Td.Kylin.Push.WebApi.Controllers
 {
 	[Route("v1/topic")]
 	public class TopicController : BaseController
 	{
-		/**
+        /**
 		 * @apiVersion 1.0.0
-		 * @apiDescription 帖子删除推送。
-		 * @api {post} /v1/topic/delete 帖子删除推送
-		 * @apiSampleRequest /v1/topic/delete
-		 * @apiName TopicDelete
+		 * @apiDescription 帖子置顶推送。
+		 * @api {post} /v1/topic/top 帖子置顶推送
+		 * @apiSampleRequest /v1/topic/top
+		 * @apiName TopicTop
 		 * @apiGroup Topic
 		 * @apiPermission All
 		 *
 		 * @apiParam {long} TopicID 帖子ID
-		 * @apiParam {string} UserIDs 报名用户id集合，多个id使用","隔开
-		 * @apiParam {string} Title 帖子标题
-		 * @apiParam {string} AreaFormName 区域圈子名称
+		 * @apiParam {long} UserID 用户id
+		 * @apiParam {string} PushCode 推送号
 		 * @apiParam {string} Contents 内容
 		 *
 		 * @apiSuccessExample 正常输出：
@@ -37,20 +37,20 @@ namespace Td.Kylin.Push.WebApi.Controllers
 		 *          "Content":"错误详细信息"
 		 * }
 		 */
-		/// <summary>
-		/// 用户审核结果（推送给用户端）
-		/// </summary>
-		/// <returns></returns>
-		[HttpPost("delete")]
+        /// <summary>
+        /// 帖子置顶推送
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("top")]
 		[ApiAuthorization]
-		public IActionResult TopicDelete(TopicDeletePushContent content)
+		public IActionResult TopicTop(TopicTopPushContent content)
 		{
 			var request = new PushRequest
 			{
-				//				PushCode = content.PushCode,
+				PushCode = content.PushCode,
 				DataType = PushDataType.SendOrder,
 				Parameters = content,
-				Message = content.Contents
+                Message = content.Content
 			};
 
 			// 推送给用户端。

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Td.Kylin.Push.Messages.User
+namespace Td.Kylin.Push.WebApi.Messages.Worker
 {
     /// <summary>
-    /// 实名认证审核推送
+    /// 4.	工作人员申请跑腿业务推送
     /// </summary>
-	public class UserAuditPushContent
+    public class WorkAuditPushContent
     {
         public string PushCode { get; set; }
         /// <summary>
         /// 用户ID
         /// </summary>
-        public long UserID
+        public long WorkerID
         {
             get;
             set;
@@ -25,7 +25,11 @@ namespace Td.Kylin.Push.Messages.User
             get;
             set;
         }
-        public bool Status { get; set; }
+        public bool Status
+        {
+            get;
+            set;
+        }
         public DateTime CreateTime { get { return DateTime.Now; } }
     }
 }

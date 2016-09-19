@@ -50,7 +50,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
 
             var request = new PushRequest
             {
-                PushCode =content.PushCode,// "7BD28C708F05272F",
+                PushCode = content.PushCode,// "7BD28C708F05272F",
                 PushType = PushType.Notification,
                 DataType = PushDataType.Legwork_AssignOrder,
                 Parameters = content,
@@ -173,6 +173,57 @@ namespace Td.Kylin.Push.WebApi.Controllers
         }
 
         /**
+        * @apiVersion 1.0.0
+        * @apiDescription  用户确认跑腿订单收货
+        * @api {post} /v1/legwork/order_userconfirm  用户确认跑腿订单收货
+        * @apiSampleRequest /v1/legwork/order_userconfirm
+        * @apiName OrderConfirm
+        * @apiGroup Legwork
+        * @apiPermission All
+        *
+        * @apiParam {string} PushCode 需要推送给用户端的推送号。
+        * @apiParam {long} OrderID 订单ID。
+        * @apiParam {string} OrderCode 订单编号。
+        * @apiParam {short} OrderStatus 订单状态。
+        *
+        * @apiSuccessExample 正常输出：
+        * {
+        *	  "Code": 0,
+        *	  "Message": null,
+        *	  "IsError": false,
+        *	  "Content": true
+        * }
+        *
+        * @apiErrorExample 错误输出:
+        * {
+        *    "Code":错误代号,
+        *    "Message":"错误标题",
+        *    "Content":"错误详细信息"
+        * }
+        */
+        [HttpPost("order_userconfirm")]
+        [ApiAuthorization]
+        public IActionResult UserOrderConfirm(OrderConfirmPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.UserConfirm.Message}", content.OrderCode);
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                PushType = PushType.Notification,
+                DataType = PushDataType.Confirm,
+                Parameters = content,
+                Message = title
+            };
+
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
+
+            return Success(response.Success);
+        }
+
+
+        /**
          * @apiVersion 1.0.0
          * @apiDescription 工作人员确认送达(取送物品)及工作人员选择线下支付时(购买物品)，推送给用户。
          * @api {post} /v1/legwork/order_delivery 物品送达
@@ -206,7 +257,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult OrderDelivery(OrderDeliveryPushContent content)
         {
-            var title = Configs.GetResource("${Legwork.OrderDelivery.Message}", content.WorkerName ?? "跑腿小哥");
+            var title = Configs.GetResource("${Legwork.OrderDelivery.Message}", content.OrderCode);
             content.Title = title;
             var request = new PushRequest
             {

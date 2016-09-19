@@ -118,10 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Legwork.AssignOrder.Message" xml:space="preserve">
-    <value>您有一个新的订单,快来报价!(滑动该消息,进入报价界面)</value>
+    <value>“新单来啦,快来抢单喽！”操作:点击/滑动进入接单中心页面并弹出报价弹窗</value>
+    <comment>跑腿订单抢单</comment>
   </data>
   <data name="Legwork.MallLegworkerPush.Message" xml:space="preserve">
-    <value>您有一个新的指派订单，仓库已备货请及时配送！</value>
+    <value>“接单了，接单了！有新指派的订单需要确定，快去处理吧！”操作:点击/滑动进入该订单详情页面</value>
+    <comment>订单指派</comment>
   </data>
   <data name="Legwork.MessageBuy.Message" xml:space="preserve">
     <value>用户催单了,快点查看一下!(滑动进行到该订单详情页)</value>
@@ -130,15 +132,20 @@
     <value>您有一个确认订单,快去跑腿吧!</value>
   </data>
   <data name="Legwork.OrderDelivery.Message" xml:space="preserve">
-    <value>"{0}"已成功为您送达物品,记得评价哟!</value>
+    <value>“您的订单“{0}”跑腿员已经送达，快去收货吧~”操作:点击/滑动进入该订单详情页面</value>
   </data>
   <data name="Legwork.OrderOffer.Message" xml:space="preserve">
-    <value>为您优选了最优惠的报价,快去查看(滑动该消息,进行报价确认界面)</value>
+    <value>“您的跑腿订单跑腿员已经报价，赶快确定吧！”点击/滑动进入等待接单页面并弹出报价确认窗口</value>
+    <comment>报价</comment>
   </data>
   <data name="Legwork.PaymentComplete.Message" xml:space="preserve">
     <value>用户已成功支付,恭喜您完成了该订单. (滑动进入到该订单的详情页面)</value>
   </data>
   <data name="Legwork.RequestPayment.Message" xml:space="preserve">
     <value>物品已送达,请进行支付(滑动该消息,进入该订单的支付页面)</value>
+  </data>
+  <data name="Legwork.UserConfirm.Message" xml:space="preserve">
+    <value>“订单‘{0}’用户确认收货”点击/滑动进入该订单详情页面</value>
+    <comment>用户确认跑腿订单收货</comment>
   </data>
 </root>

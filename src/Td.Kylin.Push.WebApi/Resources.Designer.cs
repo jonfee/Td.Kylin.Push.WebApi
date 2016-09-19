@@ -60,7 +60,7 @@ namespace Td.Kylin.Push.WebApi {
         }
         
         /// <summary>
-        ///    查找与 您有一个新的订单,快来报价!(滑动该消息,进入报价界面) 类似的本地化字符串。
+        ///    查找与 “新单来啦,快来抢单喽！”操作:点击/滑动进入接单中心页面并弹出报价弹窗 类似的本地化字符串。
         /// </summary>
         public static string Legwork_AssignOrder_Message {
             get {
@@ -69,7 +69,7 @@ namespace Td.Kylin.Push.WebApi {
         }
         
         /// <summary>
-        ///    查找与 您有一个新的指派订单，仓库已备货请及时配送！ 类似的本地化字符串。
+        ///    查找与 “接单了，接单了！有新指派的订单需要确定，快去处理吧！”操作:点击/滑动进入该订单详情页面 类似的本地化字符串。
         /// </summary>
         public static string Legwork_MallLegworkerPush_Message {
             get {
@@ -96,7 +96,7 @@ namespace Td.Kylin.Push.WebApi {
         }
         
         /// <summary>
-        ///    查找与 &quot;{0}&quot;已成功为您送达物品,记得评价哟! 类似的本地化字符串。
+        ///    查找与 “您的订单“{0}”跑腿员已经送达，快去收货吧~”操作:点击/滑动进入该订单详情页面 类似的本地化字符串。
         /// </summary>
         public static string Legwork_OrderDelivery_Message {
             get {
@@ -105,7 +105,7 @@ namespace Td.Kylin.Push.WebApi {
         }
         
         /// <summary>
-        ///    查找与 为您优选了最优惠的报价,快去查看(滑动该消息,进行报价确认界面) 类似的本地化字符串。
+        ///    查找与 “您的跑腿订单跑腿员已经报价，赶快确定吧！”点击/滑动进入等待接单页面并弹出报价确认窗口 类似的本地化字符串。
         /// </summary>
         public static string Legwork_OrderOffer_Message {
             get {
@@ -128,6 +128,15 @@ namespace Td.Kylin.Push.WebApi {
         public static string Legwork_RequestPayment_Message {
             get {
                 return ResourceManager.GetString("Legwork.RequestPayment.Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    查找与 “订单‘{0}’用户确认收货”点击/滑动进入该订单详情页面 类似的本地化字符串。
+        /// </summary>
+        public static string Legwork_UserConfirm_Message {
+            get {
+                return ResourceManager.GetString("Legwork.UserConfirm.Message", resourceCulture);
             }
         }
     }

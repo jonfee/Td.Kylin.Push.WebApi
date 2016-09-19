@@ -165,10 +165,7 @@
         /// </summary>
         MerchantAudit = 32,
 
-        /// <summary>
-        /// 用户审核
-        /// </summary>
-        UserAudit = 33,
+
 
         /// <summary>
         /// 活动帖子删除
@@ -222,5 +219,25 @@
         /// B2C下单走跑腿流程推送给工作端
         /// </summary>
         MallLegworkerPush = 44,
+        /// <summary>
+        /// 用户审核通过
+        /// </summary>
+        UserAudit = 33,
+        /// <summary>
+        /// 用户审核失败
+        /// </summary>
+        UserAuditFail = 45,
+        /// <summary>
+        /// 申请跑腿业务通过
+        /// </summary>
+        LegworkAudit = 46,
+        /// <summary>
+        /// 申请跑腿业务失败
+        /// </summary>
+        LegworkAuditFail = 47,
+        /// <summary>
+        /// 取消订单
+        /// </summary>
+        B2CCancelOrder = 48,
     }
 }

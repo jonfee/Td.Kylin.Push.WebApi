@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Td.Kylin.Push.WebApi.Messages.Worker;
 using Td.Kylin.WebApi;
 using Td.Kylin.WebApi.Filters;
-using Td.Kylin.Push.Messages.User;
 
 namespace Td.Kylin.Push.WebApi.Controllers
 {
-    [Route("v1/user")]
-    public class UserController : BaseController
+    [Route("v1/worker")]
+    public class WorkerController : BaseController
     {
         /**
 		 * @apiVersion 1.0.0
-		 * @apiDescription 用户审核结果。
-		 * @api {post} /v1/user/audit 用户审核结果
+		 * @apiDescription 跑腿业务审核结果。
+		 * @api {post} /v1/user/audit 跑腿业务审核结果
 		 * @apiSampleRequest /v1/user/audit
 		 * @apiName UserAudit
 		 * @apiGroup User
@@ -41,7 +42,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
         /// <returns></returns>
         [HttpPost("audit")]
         [ApiAuthorization]
-        public IActionResult UserAudit(UserAuditPushContent content)
+        public IActionResult UserAudit(WorkAuditPushContent content)
         {
             //content = new UserAuditPushContent()
             //{
@@ -54,13 +55,13 @@ namespace Td.Kylin.Push.WebApi.Controllers
             var request = new PushRequest
             {
                 PushCode = content.PushCode,
-                DataType = content.Status ? PushDataType.UserAudit : PushDataType.UserAuditFail,
+                DataType = content.Status ? PushDataType.LegworkAudit : PushDataType.LegworkAuditFail,
                 Parameters = content,
                 Message = content.Contents
             };
 
             // 推送给用户端。
-            var response = PushProviderFactory.UserClient.Send(request);
+            var response = PushProviderFactory.WorkerClient.Send(request);
 
             return Success(response.Success);
         }
