@@ -17,5 +17,10 @@ namespace Td.Kylin.Push.WebApi.Messages.User
 			get;
 			set;
 		}
-    }
+		public int Identity
+		{
+			get;
+			set;
+		}
+	}
 }

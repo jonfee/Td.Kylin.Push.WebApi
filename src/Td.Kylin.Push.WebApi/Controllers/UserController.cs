@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Td.Kylin.EnumLibrary;
 using Td.Kylin.WebApi;
 using Td.Kylin.WebApi.Filters;
 using Td.Kylin.Push.Messages.User;
@@ -86,10 +87,24 @@ namespace Td.Kylin.Push.WebApi.Controllers
 				Message = title,
 				Title = title,
 			};
+			var response = new PushResponse();
+			switch(content.Identity)
+			{
+				//用户端
+				case (int)UsePartnerIdentity.DefaultUser:
+					response = PushProviderFactory.UserClient.Send(request);
 
-			// 推送给用户端。
-			var response = PushProviderFactory.UserClient.Send(request);
+					break;
+				//商家端
+				case (int)UsePartnerIdentity.Merchant:
+					// TODO
+					break;
+				//工作端
+				case (int)UsePartnerIdentity.Worker:
+					response = PushProviderFactory.WorkerClient.Send(request);
 
+					break;
+			}
 			return Success(response.Success);
 		}
 
