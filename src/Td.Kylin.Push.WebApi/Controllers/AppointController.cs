@@ -9,6 +9,7 @@ using Td.Kylin.WebApi.Filters;
 namespace Td.Kylin.Push.WebApi.Controllers
 {
     [Route("v1/appoint")]
+    [Obsolete("上门预约业务暂时搁置，直接忽略")]
     public class AppointController : BaseController
     {
         /**

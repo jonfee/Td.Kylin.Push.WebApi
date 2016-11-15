@@ -4,6 +4,7 @@ using JPush.Api.push.mode;
 using JPush.Api.push.notification;
 using Td.Diagnostics;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Td.Kylin.Push
 {
@@ -61,24 +62,51 @@ namespace Td.Kylin.Push
 
         #region 公共方法
 
-        public PushResponse Send(PushRequest request, bool apnsProduction = false)
+        /// <summary>
+        /// 推送
+        /// </summary>
+        /// <param name="request">自定义推送请求</param>
+        /// <param name="pushIfPushCodeNull">推送号为null时是否继续推送</param>
+        /// <param name="apnsProduction">是否非生产环境</param>
+        /// <returns></returns>
+        public virtual PushResponse Send(PushRequest request, bool pushIfPushCodeNull = false, bool apnsProduction = false)
         {
             if (request == null)
                 throw new InvalidOperationException("request is null.");
 
             var response = new PushResponse();
 
-            try
+            //如果pushIfPushCodeNull为true时，别名为null则不继续推送
+            if (!pushIfPushCodeNull)
             {
-                var payload = this.GetPayload(request, apnsProduction);
-                var result = this.Client.SendPush(payload);
+                string[] codes = ResolveAlias(request.PushCode);
+                if (codes == null || codes.Length < 1)
+                {
+                    Task.Run(() =>
+                    {
+                        Logger.Error($"{nameof(request.PushCode)}为空。", request);
+                    });
 
-                response.Success = result.isResultOK();
-                response.MessageId = result.msg_id;
+                    response.Success = false;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Logger.Error(ex);
+                try
+                {
+                    var payload = this.GetPayload(request, apnsProduction);
+                    var result = this.Client.SendPush(payload);
+
+                    response.Success = result.isResultOK();
+                    response.MessageId = result.msg_id;
+                }
+                catch (Exception ex)
+                {
+                    Task.Run(() =>
+                    {
+                        Logger.Error(ex);
+                    });
+                }
             }
 
             return response;
@@ -88,7 +116,13 @@ namespace Td.Kylin.Push
 
         #region 虚拟方法
 
-        protected virtual PushPayload GetPayload(PushRequest request, bool apnsProduction = false)
+        /// <summary>
+        /// 构建推送
+        /// </summary>
+        /// <param name="request">自定义推送请求</param>
+        /// <param name="apnsProduction">是否非生产环境</param>
+        /// <returns></returns>
+        private PushPayload GetPayload(PushRequest request, bool apnsProduction = false)
         {
             var payload = new PushPayload();
             payload.options.apns_production = apnsProduction;
@@ -104,7 +138,6 @@ namespace Td.Kylin.Push
             {
                 payload.audience = Audience.all();
             }
-
 
             // 设置推送类型
             if (request.PushType == PushType.Notification)
@@ -136,10 +169,9 @@ namespace Td.Kylin.Push
         /// <returns>解析后的别名数组。</returns>
         private string[] ResolveAlias(string pushCode)
         {
-            if (pushCode.LastIndexOf(',') == pushCode.Length - 1)
-                pushCode = pushCode.Substring(0, pushCode.Length - 1);
+            if (string.IsNullOrWhiteSpace(pushCode)) return null;
 
-            return pushCode.Split(',');
+            return pushCode.Split(new char[] { ',', '|' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         /// <summary>

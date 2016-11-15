@@ -149,7 +149,7 @@
     <comment>用户确认跑腿订单收货</comment>
   </data>
   <data name="User.SingleLogin.Message" xml:space="preserve">
-    <value>你的账户已在别设备上登录</value>
+    <value>你的账户已在别的设备上登录</value>
     <comment>单点登录</comment>
   </data>
 </root>

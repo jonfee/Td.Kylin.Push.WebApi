@@ -13,6 +13,7 @@ using Td.Kylin.WebApi.Filters;
 namespace Td.Kylin.Push.WebApi.Controllers
 {
     [Route("v1/welfare")]
+    [Obsolete("商家福利业务搁置，直接忽略")]
     public class WelfareController : BaseController
     {
         /**

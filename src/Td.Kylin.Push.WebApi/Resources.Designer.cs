@@ -141,7 +141,7 @@ namespace Td.Kylin.Push.WebApi {
         }
         
         /// <summary>
-        ///    查找与 你的账户已在别设备上登录 类似的本地化字符串。
+        ///    查找与 你的账户已在别的设备上登录 类似的本地化字符串。
         /// </summary>
         public static string User_SingleLogin_Message {
             get {

@@ -47,21 +47,21 @@ namespace Td.Kylin.Push.WebApi.Controllers
         [ApiAuthorization]
         public IActionResult PayOrder(PayMerchantOrderContent content)
         {
-			var request = new PushRequest
-			{
-							PushCode = content.PushCode,
-				DataType = PushDataType.PayOrder,
-				Parameters = content,
-				Message = string.Format("用户已经下单付款！(订单号：{0})", content.OrderCode)
-			};
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.PayOrder,
+                Parameters = content,
+                Message = string.Format("用户已经下单付款！(订单号：{0})", content.OrderCode)
+            };
 
-			// 推送给商家端。
-			var response = PushProviderFactory.MerchantClient.Send(request);
+            // 推送给商家端。
+            var response = PushProviderFactory.MerchantClient.Send(request);
 
-			return Success(response.Success);
+            return Success(response.Success);
         }
 
-		/**
+        /**
         * @apiVersion 1.0.0
         * @apiDescription 此接口在商家发货-推送用户端
         * @api {post} /v1/order/send 商家发货-推送用户端
@@ -88,27 +88,27 @@ namespace Td.Kylin.Push.WebApi.Controllers
         *          "Content":"错误详细信息"
         * }
         */
-		/// <summary>
-		/// 商家发货-推送用户端
-		/// </summary>
-		/// <returns></returns>
-		[HttpPost("send")]
-		[ApiAuthorization]
-		public IActionResult SendOrder(SendMerchantOrderContent content)
+        /// <summary>
+        /// 商家发货-推送用户端
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("send")]
+        [ApiAuthorization]
+        public IActionResult SendOrder(SendMerchantOrderContent content)
         {
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				DataType = PushDataType.SendOrder,
-				Parameters = content,
-				Message = string.Format("订单已发货！(订单号：{0})", content.OrderCode)
-			};
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.SendOrder,
+                Parameters = content,
+                Message = string.Format("订单已发货！(订单号：{0})", content.OrderCode)
+            };
 
-			// 推送给用户端。
-			var response = PushProviderFactory.UserClient.Send(request);
+            // 推送给用户端。
+            var response = PushProviderFactory.UserClient.Send(request);
 
-			return Success(response.Success);
-		}
+            return Success(response.Success);
+        }
 
         /// <summary>
         /// 用户确认收货-推送商家端

@@ -9,10 +9,10 @@ using Td.Kylin.Push.Data;
 
 namespace Td.Kylin.Push.WebApi.Controllers
 {
-	[Route("v1/legwork")]
-	public class LegworkController : BaseController
-	{
-		/**
+    [Route("v1/legwork")]
+    public class LegworkController : BaseController
+    {
+        /**
          * @apiVersion 1.0.0
          * @apiDescription 用户下单后，系统将订单指派给相关的工作人员。
          * @api {post} /v1/legwork/assign_order 订单指派
@@ -41,29 +41,28 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *    "Content":"错误详细信息"
          * }
          */
-		[HttpPost("assign_order")]
-		//[ApiAuthorization]
-		public IActionResult AssignOrder(AssignOrderPushContent content)
-		{
-			var title = Configs.GetResource("${Legwork.AssignOrder.Message}");
-			content.Title = title;
+        [HttpPost("assign_order")]
+        //[ApiAuthorization]
+        public IActionResult AssignOrder(AssignOrderPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.AssignOrder.Message}");
+            content.Title = title;
 
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				PushType = PushType.Notification,
-				DataType = PushDataType.Legwork_AssignOrder,
-				Parameters = content,
-				Message = title
-			};
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.Legwork_AssignOrder,
+                Parameters = content,
+                Message = title
+            };
 
-			// 推送给工作端。
-			var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-			return Success(response.Success);
-		}
+            return Success(response.Success);
+        }
 
-		/**
+        /**
          * @apiVersion 1.0.0
          * @apiDescription 工作人员报价后，将报价结果推送给指定的用户。
          * @api {post} /v1/legwork/order_offer 订单报价
@@ -95,35 +94,33 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *    "Content":"错误详细信息"
          * }
          */
-		[HttpPost("order_offer")]
-		[ApiAuthorization]
-		public IActionResult OrderOffer(OrderOfferPushContent content)
-		{
-			var Model = ServicesProvider.Items.LegworkOrderServices.GetModel(content.OrderID);
-			if(null != Model && Model.Status != (int)LegworkOrderStatus.Canceled)
-			{
+        [HttpPost("order_offer")]
+        [ApiAuthorization]
+        public IActionResult OrderOffer(OrderOfferPushContent content)
+        {
+            var Model = ServicesProvider.Items.LegworkOrderServices.GetModel(content.OrderID);
+            if (null != Model && Model.Status != (int)LegworkOrderStatus.Canceled)
+            {
 
-				var title = Configs.GetResource("${Legwork.OrderOffer.Message}");
-				content.Title = title;
-				var request = new PushRequest
-				{
-					PushCode = content.PushCode,
+                var title = Configs.GetResource("${Legwork.OrderOffer.Message}");
+                content.Title = title;
+                var request = new PushRequest
+                {
+                    PushCode = content.PushCode,
+                    DataType = PushDataType.Legwork_OrderOffer,
+                    Parameters = content,
+                    Message = title
+                };
 
-					PushType = PushType.Notification,
-					DataType = PushDataType.Legwork_OrderOffer,
-					Parameters = content,
-					Message = title
-				};
+                // 推送给用户端。
+                var response = PushProviderFactory.UserClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-				// 推送给用户端。
-				var response = PushProviderFactory.UserClient.Send(request, Config.apnsProduction);
+                return Success(response.Success);
+            }
+            return Success("");
+        }
 
-				return Success(response.Success);
-			}
-			return Success("");
-		}
-
-		/**
+        /**
          * @apiVersion 1.0.0
          * @apiDescription 用户接受报价后，将结果推送给指定的工作人员。
          * @api {post} /v1/legwork/order_confirm 订单报价确认
@@ -152,28 +149,27 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *    "Content":"错误详细信息"
          * }
          */
-		[HttpPost("order_confirm")]
-		[ApiAuthorization]
-		public IActionResult OrderConfirm(OrderConfirmPushContent content)
-		{
-			var title = Configs.GetResource("${Legwork.OrderConfirm.Message}");
-			content.Title = title;
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				PushType = PushType.Notification,
-				DataType = PushDataType.Legwork_OrderConfirm,
-				Parameters = content,
-				Message = title
-			};
+        [HttpPost("order_confirm")]
+        [ApiAuthorization]
+        public IActionResult OrderConfirm(OrderConfirmPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.OrderConfirm.Message}");
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.Legwork_OrderConfirm,
+                Parameters = content,
+                Message = title
+            };
 
-			// 推送给工作端。
-			var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-			return Success(response.Success);
-		}
+            return Success(response.Success);
+        }
 
-		/**
+        /**
         * @apiVersion 1.0.0
         * @apiDescription  用户确认跑腿订单收货
         * @api {post} /v1/legwork/order_userconfirm  用户确认跑腿订单收货
@@ -202,29 +198,28 @@ namespace Td.Kylin.Push.WebApi.Controllers
         *    "Content":"错误详细信息"
         * }
         */
-		[HttpPost("order_userconfirm")]
-		[ApiAuthorization]
-		public IActionResult UserOrderConfirm(OrderConfirmPushContent content)
-		{
-			var title = Configs.GetResource("${Legwork.UserConfirm.Message}", content.OrderCode);
-			content.Title = title;
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				PushType = PushType.Notification,
-				DataType = PushDataType.Confirm,
-				Parameters = content,
-				Message = title
-			};
+        [HttpPost("order_userconfirm")]
+        [ApiAuthorization]
+        public IActionResult UserOrderConfirm(OrderConfirmPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.UserConfirm.Message}", content.OrderCode);
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.Confirm,
+                Parameters = content,
+                Message = title
+            };
 
-			// 推送给工作端。
-			var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-			return Success(response.Success);
-		}
+            return Success(response.Success);
+        }
 
 
-		/**
+        /**
          * @apiVersion 1.0.0
          * @apiDescription 工作人员确认送达(取送物品)及工作人员选择线下支付时(购买物品)，推送给用户。
          * @api {post} /v1/legwork/order_delivery 物品送达
@@ -254,28 +249,27 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *    "Content":"错误详细信息"
          * }
          */
-		[HttpPost("order_delivery")]
-		[ApiAuthorization]
-		public IActionResult OrderDelivery(OrderDeliveryPushContent content)
-		{
-			var title = Configs.GetResource("${Legwork.OrderDelivery.Message}", content.OrderCode);
-			content.Title = title;
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				PushType = PushType.Notification,
-				DataType = PushDataType.Legwork_OrderDelivery,
-				Parameters = content,
-				Message = title
-			};
+        [HttpPost("order_delivery")]
+        [ApiAuthorization]
+        public IActionResult OrderDelivery(OrderDeliveryPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.OrderDelivery.Message}", content.OrderCode);
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.Legwork_OrderDelivery,
+                Parameters = content,
+                Message = title
+            };
 
-			// 推送给用户端。
-			var response = PushProviderFactory.UserClient.Send(request, Config.apnsProduction);
+            // 推送给用户端。
+            var response = PushProviderFactory.UserClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-			return Success(response.Success);
-		}
+            return Success(response.Success);
+        }
 
-		/**
+        /**
          * @apiVersion 1.0.0
          * @apiDescription 工作人员选择线上支付,推送给用户端，请求用户支付。
          * @api {post} /v1/legwork/request_payment 请求支付
@@ -307,28 +301,27 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *    "Content":"错误详细信息"
          * }
          */
-		[HttpPost("request_payment")]
-		[ApiAuthorization]
-		public IActionResult RequestPayment(RequestPaymentPushContent content)
-		{
-			var title = Configs.GetResource("${Legwork.RequestPayment.Message}");
-			content.Title = title;
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				PushType = PushType.Notification,
-				DataType = PushDataType.Legwork_RequestPayment,
-				Parameters = content,
-				Message = title
-			};
+        [HttpPost("request_payment")]
+        [ApiAuthorization]
+        public IActionResult RequestPayment(RequestPaymentPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.RequestPayment.Message}");
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.Legwork_RequestPayment,
+                Parameters = content,
+                Message = title
+            };
 
-			// 推送给用户端。
-			var response = PushProviderFactory.UserClient.Send(request, Config.apnsProduction);
+            // 推送给用户端。
+            var response = PushProviderFactory.UserClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-			return Success(response.Success);
-		}
+            return Success(response.Success);
+        }
 
-		/**
+        /**
          * @apiVersion 1.0.0
          * @apiDescription 用户线上支付成功,推送给工作人员。
          * @api {post} /v1/legwork/payment_complete 支付完成
@@ -358,28 +351,27 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *    "Content":"错误详细信息"
          * }
          */
-		[HttpPost("payment_complete")]
-		[ApiAuthorization]
-		public IActionResult PaymentComplete(PaymentCompletePushContent content)
-		{
-			var title = Configs.GetResource("${Legwork.PaymentComplete.Message}");
-			content.Title = title;
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				PushType = PushType.Notification,
-				DataType = PushDataType.Legwork_PaymentComplete,
-				Parameters = content,
-				Message = title
-			};
+        [HttpPost("payment_complete")]
+        [ApiAuthorization]
+        public IActionResult PaymentComplete(PaymentCompletePushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.PaymentComplete.Message}");
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.Legwork_PaymentComplete,
+                Parameters = content,
+                Message = title
+            };
 
-			// 推送给工作端。
-			var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-			return Success(response.Success);
-		}
+            return Success(response.Success);
+        }
 
-		/**
+        /**
          * @apiVersion 1.0.0
          * @apiDescription 用户线上支付成功,提醒购买（用户催单）
          * @api {post} /v1/legwork/msgbuy 提醒购买（用户催单）
@@ -408,27 +400,26 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *    "Content":"错误详细信息"
          * }
          */
-		[HttpPost("msgbuy")]
-		[ApiAuthorization]
-		public IActionResult MessageBuy(MessageBuyPushContent content)
-		{
-			var title = Configs.GetResource("${Legwork.MessageBuy.Message}");
-			content.Title = title;
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				PushType = PushType.Notification,
-				DataType = PushDataType.Legwork_MessageBuy,
-				Parameters = content,
-				Message = title
-			};
+        [HttpPost("msgbuy")]
+        [ApiAuthorization]
+        public IActionResult MessageBuy(MessageBuyPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.MessageBuy.Message}");
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.Legwork_MessageBuy,
+                Parameters = content,
+                Message = title
+            };
 
-			// 推送给工作端。
-			var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-			return Success(response.Success);
-		}
-		/**
+            return Success(response.Success);
+        }
+        /**
          * @apiVersion 1.0.0
          * @apiDescription B2C下单走跑腿流程推送给工作端
          * @api {post} /v1/legwork/mall B2C下单走跑腿流程推送给工作端
@@ -457,25 +448,24 @@ namespace Td.Kylin.Push.WebApi.Controllers
          *    "Content":"错误详细信息"
          * }
          */
-		[HttpPost("mall")]
-		[ApiAuthorization]
-		public IActionResult MallLegworkerPush(AssignOrderPushContent content)
-		{
-			var title = Configs.GetResource("${Legwork.MallLegworkerPush.Message}");
-			content.Title = title;
-			var request = new PushRequest
-			{
-				PushCode = content.PushCode,
-				PushType = PushType.Notification,
-				DataType = PushDataType.MallLegworkerPush,
-				Parameters = content,
-				Message = title
-			};
+        [HttpPost("mall")]
+        [ApiAuthorization]
+        public IActionResult MallLegworkerPush(AssignOrderPushContent content)
+        {
+            var title = Configs.GetResource("${Legwork.MallLegworkerPush.Message}");
+            content.Title = title;
+            var request = new PushRequest
+            {
+                PushCode = content.PushCode,
+                DataType = PushDataType.MallLegworkerPush,
+                Parameters = content,
+                Message = title
+            };
 
-			// 推送给工作端。
-			var response = PushProviderFactory.WorkerClient.Send(request, Config.apnsProduction);
+            // 推送给工作端。
+            var response = PushProviderFactory.WorkerClient.Send(request, pushIfPushCodeNull: false, apnsProduction: Config.apnsProduction);
 
-			return Success(response.Success);
-		}
-	}
+            return Success(response.Success);
+        }
+    }
 }

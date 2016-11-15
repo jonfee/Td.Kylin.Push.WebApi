@@ -11,6 +11,7 @@ using Td.Kylin.Push.WebApi.Messages.Merchant;
 namespace Td.Kylin.Push.WebApi.Controllers
 {
     [Route("v1/merchant")]
+    [Obsolete("商家相关业务搁置，直接忽略")]
     public class MerchantController : BaseController
     {
         /**

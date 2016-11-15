@@ -85,7 +85,7 @@ namespace Td.Kylin.Push.WebApi.Controllers
 				DataType = PushDataType.SingleLogin,
 				Parameters = content,
 				Message = title,
-				Title = title,
+				Title = title
 			};
 			var response = new PushResponse();
 			switch(content.Identity)

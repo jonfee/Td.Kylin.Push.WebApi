@@ -10,8 +10,8 @@ namespace Td.Kylin.Push
 	{
 		#region 私有字段
 
-		private bool _autoBadge = true;								// 自动增长角标
-		private PushType _pushType = PushType.Notification;			// 默认推送类型为通知
+		private bool _autoBadge = true;                             // 自动增长角标
+        private PushType _pushType = PushType.Message;			    // 默认推送类型为自定义
 
 		#endregion
 
