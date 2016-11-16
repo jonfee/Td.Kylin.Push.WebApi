@@ -17,6 +17,6 @@ namespace Td.Kylin.Push
         /// <param name="pushIfPushCodeNull">推送号为null时是否继续推送</param>
         /// <param name="apnsProduction">是否非生产环境</param>
         /// <returns></returns>
-        PushResponse Send(PushRequest message, bool pushIfPushCodeNull = false, bool apnsProduction = false);
+        PushResponse Send(PushRequest message, bool pushIfPushCodeNull = true, bool apnsProduction = true);
     }
 }

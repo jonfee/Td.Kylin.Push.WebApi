@@ -69,7 +69,7 @@ namespace Td.Kylin.Push
         /// <param name="pushIfPushCodeNull">推送号为null时是否继续推送</param>
         /// <param name="apnsProduction">是否非生产环境</param>
         /// <returns></returns>
-        public virtual PushResponse Send(PushRequest request, bool pushIfPushCodeNull = false, bool apnsProduction = false)
+        public virtual PushResponse Send(PushRequest request, bool pushIfPushCodeNull, bool apnsProduction)
         {
             if (request == null)
                 throw new InvalidOperationException("request is null.");
@@ -77,7 +77,7 @@ namespace Td.Kylin.Push
             var response = new PushResponse();
 
             //如果pushIfPushCodeNull为true时，别名为null则不继续推送
-            if (!pushIfPushCodeNull)
+            if (pushIfPushCodeNull)
             {
                 string[] codes = ResolveAlias(request.PushCode);
                 if (codes == null || codes.Length < 1)
